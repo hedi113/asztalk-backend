@@ -22,3 +22,5 @@ global using ErrorOr;
 global using FluentValidation.Results;
 global using System.Globalization;
 global using Solution.Validators;
+global using FluentValidation;
+global using Microsoft.Maui.Storage;

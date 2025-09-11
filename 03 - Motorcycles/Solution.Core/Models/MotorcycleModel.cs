@@ -23,13 +23,13 @@ public partial class MotorcycleModel : ObservableObject
     public string model;
 
     [ObservableProperty]
-    public int cubic;
+    public int? cubic;
 
     [ObservableProperty]
-    public int releaseYear;
+    public int? releaseYear;
 
     [ObservableProperty]
-    public int numberOfCylinders;
+    public int? numberOfCylinders;
 
     public MotorcycleModel() { }
 
@@ -56,9 +56,9 @@ public partial class MotorcycleModel : ObservableObject
             ImageId = ImageId,
             WebContentLink = WebContentLink,
             Model = Model,
-            Cubic = Cubic,
-            ReleaseYear = ReleaseYear,
-            Cylinders = NumberOfCylinders
+            Cubic = Cubic.Value,
+            ReleaseYear = ReleaseYear.Value,
+            Cylinders = NumberOfCylinders.Value
         };
     }
 
@@ -70,8 +70,8 @@ public partial class MotorcycleModel : ObservableObject
         entity.ImageId = ImageId;
         entity.WebContentLink = WebContentLink;
         entity.Model = Model;
-        entity.Cubic = Cubic;
-        entity.ReleaseYear = ReleaseYear;
-        entity.Cylinders = NumberOfCylinders;
+        entity.Cubic = Cubic.Value;
+        entity.ReleaseYear = ReleaseYear.Value;
+        entity.Cylinders = NumberOfCylinders.Value;
     }
 }

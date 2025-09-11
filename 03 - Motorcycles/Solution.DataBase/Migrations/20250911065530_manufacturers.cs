@@ -5,23 +5,24 @@
 namespace Solution.Database.Migrations
 {
     /// <inheritdoc />
+    /// <inheritdoc />
     public partial class manufacturers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             var query = @$"
-                insert into
-                    [Manufacturer]
-                    ([Name])
-                values
-                    ('Honda'),
-                    ('Yamaha'),
-                    ('Suzuki'),
-                    ('Triumph'),
-                    ('Harley-Davidson'),
-                    ('Kawasaki')
-            ";
+        insert into
+            [Manufacturer]
+            ([Name])
+        values
+            ('Honda'),
+            ('Yamaha'),
+            ('Suzuki'),
+            ('Triumph'),
+            ('Harley-Davidson'),
+            ('Kawasaki')
+    ";
 
             migrationBuilder.Sql(query);
         }
