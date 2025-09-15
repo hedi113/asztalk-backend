@@ -1,7 +1,7 @@
 ﻿namespace Solution.DesktopApp.ViewModels;
 
 [ObservableObject]
-public partial class MotorcycleListViewModel(IMotorcycleService motorcycleService)
+public partial class MotorcycleListViewModel(ITypeService motorcycleService)
 {
     #region life cycle commands
     public IAsyncRelayCommand AppearingCommand => new AsyncRelayCommand(OnAppearingAsync);

@@ -1,23 +1,21 @@
 ﻿namespace Solution.Services;
 
-public class MotorcycleService(AppDbContext dbContext) : ITypeService
+public class TypeService(AppDbContext dbContext) : ITypeService
 {
     private const int ROW_COUNT = 10;
 
-    public async Task<ErrorOr<MotorcycleModel>> CreateAsync(MotorcycleModel model)
+    public async Task<ErrorOr<TypeModel>> CreateAsync(TypeModel model)
     {
-        bool exists = await dbContext.Motorcycles.AnyAsync(x => x.ManufacturerId == model.Manufacturer.Id &&
-                                                                x.Model.ToLower() == model.Model.ToLower().Trim() &&
-                                                                x.ReleaseYear == model.ReleaseYear.Value);
+        bool exists = await dbContext.Types.AnyAsync(x => x.Name == model.Name);
 
         if (exists)
         {
-            return Error.Conflict(description: "Motorcycle already exists!");
+            return Error.Conflict(description: "Type already exists!");
         }
 
-        var motorcycle = model.ToEntity();
-        motorcycle.PublicId = Guid.NewGuid().ToString();
-        
+        var type = model.ToEntity();
+        type.PublicId = Guid.NewGuid().ToString();
+
         await dbContext.Motorcycles.AddAsync(motorcycle);
         await dbContext.SaveChangesAsync();
 
