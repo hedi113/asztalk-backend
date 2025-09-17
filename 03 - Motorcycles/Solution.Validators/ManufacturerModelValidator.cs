@@ -2,7 +2,7 @@
 
 public class ManufacturerModelValidator : AbstractValidator<ManufacturerModel>
 {
-    public static string TypeProperty => nameof(ManufacturerModel.Name);
+    public static string ManufacturerProperty => nameof(ManufacturerModel.Name);
     public static string GlobalProperty => "Global";
 
 

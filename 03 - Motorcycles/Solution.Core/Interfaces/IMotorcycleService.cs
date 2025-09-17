@@ -1,6 +1,6 @@
 ﻿namespace Solution.Core.Interfaces;
 
-public interface ITypeService
+public interface IMotorcycleService
 {
     Task<ErrorOr<MotorcycleModel>> CreateAsync(MotorcycleModel model);
     Task<ErrorOr<Success>> UpdateAsync(MotorcycleModel model);

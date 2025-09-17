@@ -1,12 +1,12 @@
 namespace Solution.DesktopApp.Views;
 
-public partial class CreateOrEditMotorcycleView : ContentPage
+public partial class AddManufacturerView : ContentPage
 {
-	public CreateOrEditMotorcycleViewModel ViewModel => this.BindingContext as CreateOrEditMotorcycleViewModel;
+	public AddManufacturerViewModel ViewModel => this.BindingContext as AddManufacturerViewModel;
 
-	public static string Name => nameof(CreateOrEditMotorcycleView);
+	public static string Name => nameof(AddManufacturerView);
 
-    public CreateOrEditMotorcycleView(CreateOrEditMotorcycleViewModel viewModel)
+    public AddManufacturerView(AddManufacturerViewModel viewModel)
 	{
 		this.BindingContext = viewModel;
 

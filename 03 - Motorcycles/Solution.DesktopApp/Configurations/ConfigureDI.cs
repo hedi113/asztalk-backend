@@ -1,4 +1,6 @@
-﻿namespace Solution.DesktopApp.Configurations;
+﻿using Solution.Services.Services;
+
+namespace Solution.DesktopApp.Configurations;
 
 public static class ConfigureDI
 {
@@ -7,13 +9,15 @@ public static class ConfigureDI
 		builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<MotorcycleListViewModel>();
         builder.Services.AddTransient<CreateOrEditMotorcycleViewModel>();
+        builder.Services.AddTransient<AddTypeViewModel>();
+        builder.Services.AddTransient<AddManufacturerViewModel>();
 
         builder.Services.AddTransient<MainView>();
         builder.Services.AddTransient<MotorcycleListView>();
         builder.Services.AddTransient<CreateOrEditMotorcycleView>();
 
         builder.Services.AddScoped<IGoogleDriveService, GoogleDriveService> ();
-        builder.Services.AddTransient<ITypeService, MotorcycleService>();
+        builder.Services.AddTransient<IMotorcycleService, MotorcycleService>();
 
         return builder;
 	}

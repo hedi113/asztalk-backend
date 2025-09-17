@@ -3,7 +3,7 @@ using Solution.Services;
 
 namespace Solution.DesktopApp.ViewModels;
 
-public partial class AddManufacturerViewModel(
+public partial class AddManufacturerViewModel(IManufacturerService manufacturerService,
     AppDbContext dbContext) : ManufacturerModel, IQueryAttributable
 {
     #region life cycle commands
@@ -23,6 +23,9 @@ public partial class AddManufacturerViewModel(
 
     [ObservableProperty]
     private ValidationResult validationResult = new ValidationResult();
+
+    [ObservableProperty]
+    private string title;
 
     private delegate Task ButtonActionDelagate();
     private ButtonActionDelagate asyncButtonAction;

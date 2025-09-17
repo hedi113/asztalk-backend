@@ -113,7 +113,7 @@
                 <editors:SfNumericEntry
                     Value="{Binding Cubic}"
                     ShowClearButton="True"
-                    CustomFormat="NO">
+                    CustomFormat="N0">
                     <editors:SfNumericEntry.Behaviors>
                     <toolkit:EventToCommandBehavior
                             EventName="ValueChanged"
@@ -140,7 +140,7 @@
                 <editors:SfNumericEntry
                     Value="{Binding NumberOfCylinders}"
                     ShowClearButton="True"
-                    CustomFormat="NO">
+                    CustomFormat="N0">
                 <editors:SfNumericEntry.Behaviors>
                         <toolkit:EventToCommandBehavior
                              EventName="ValueChanged"
@@ -190,7 +190,7 @@
                 <editors:SfNumericEntry
                     Value="{Binding ReleaseYear}"
                     ShowClearButton="True"
-                    CustomFormat="NO">
+                    CustomFormat="N0">
                     <editors:SfNumericEntry.Behaviors>
                         <toolkit:EventToCommandBehavior
                             EventName="ValueChanged"

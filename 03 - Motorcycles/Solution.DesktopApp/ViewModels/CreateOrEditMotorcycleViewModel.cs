@@ -2,7 +2,7 @@
 
 public partial class CreateOrEditMotorcycleViewModel(
     AppDbContext dbContext,
-    ITypeService motorcycleService,
+    IMotorcycleService motorcycleService,
     IGoogleDriveService googleDriveService) : MotorcycleModel, IQueryAttributable
 {
     #region life cycle commands

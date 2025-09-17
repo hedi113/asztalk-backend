@@ -14,78 +14,64 @@ public class TypeService(AppDbContext dbContext) : ITypeService
         }
 
         var type = model.ToEntity();
-        type.PublicId = Guid.NewGuid().ToString();
 
-        await dbContext.Motorcycles.AddAsync(motorcycle);
+        await dbContext.Types.AddAsync(type);
         await dbContext.SaveChangesAsync();
 
-        return new MotorcycleModel(motorcycle)
+        return new TypeModel(type)
         {
-            Manufacturer = model.Manufacturer
+            Name = model.Name
         };
     }
 
-    public async Task<ErrorOr<Success>> UpdateAsync(MotorcycleModel model)
+    public async Task<ErrorOr<Success>> UpdateAsync(TypeModel model)
     {
-        var result = await dbContext.Motorcycles.AsNoTracking()
-                                                .Include(x => x.Manufacturer)
-                                                .Where(x => x.PublicId == model.Id)
-                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.PublicId, model.Id)
-                                                                          .SetProperty(p => p.ManufacturerId, model.Manufacturer.Id)
-                                                                          .SetProperty(p => p.Model, model.Model)
-                                                                          .SetProperty(p => p.Cubic, model.Cubic)
-                                                                          .SetProperty(p => p.ReleaseYear, model.ReleaseYear.Value)
-                                                                          .SetProperty(p => p.Cylinders, model.NumberOfCylinders.Value)
-                                                                          .SetProperty(p => p.ImageId, model.ImageId)
-                                                                          .SetProperty(p => p.WebContentLink, model.WebContentLink));
+        var result = await dbContext.Types.AsNoTracking()
+                                                .Where(x => x.Id == model.Id)
+                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Name, model.Name));
         return result > 0 ? Result.Success : Error.NotFound();
     }
 
-    public async Task<ErrorOr<Success>> DeleteAsync(string motorcycleId)
+    public async Task<ErrorOr<Success>> DeleteAsync(int typeId)
     {
-        var result = await dbContext.Motorcycles.AsNoTracking()
-                                                .Include(x => x.Manufacturer)
-                                                .Where(x => x.PublicId == motorcycleId)
+        var result = await dbContext.Types.AsNoTracking()
+                                                .Where(x => x.Id == typeId)
                                                 .ExecuteDeleteAsync();
 
         return result > 0 ? Result.Success : Error.NotFound();
     }
 
-    public async Task<ErrorOr<MotorcycleModel>> GetByIdAsync(string motorcycleId)
+    public async Task<ErrorOr<TypeModel>> GetByIdAsync(int typeId)
     {
-        var motorcycle = await dbContext.Motorcycles.Include(x => x.Manufacturer)
-                                                    .FirstOrDefaultAsync(x => x.PublicId == motorcycleId);
+        var type = await dbContext.Types.FirstOrDefaultAsync(x => x.Id == typeId);
 
-        if (motorcycle is null)
+        if (type is null)
         {
-            return Error.NotFound(description: "Motorcycle not found.");
+            return Error.NotFound(description: "Type not found.");
         }
 
-        return new MotorcycleModel(motorcycle);
+        return new TypeModel(type);
     }
 
-    public async Task<ErrorOr<List<MotorcycleModel>>> GetAllAsync() =>
-        await dbContext.Motorcycles.AsNoTracking()
-                                   .Include(x => x.Manufacturer)
-                                   .Select(x => new MotorcycleModel(x))
+    public async Task<ErrorOr<List<TypeModel>>> GetAllAsync() =>
+        await dbContext.Types.AsNoTracking()
+                                   .Select(x => new TypeModel(x))
                                    .ToListAsync();
 
-    public async Task<ErrorOr<PaginationModel<MotorcycleModel>>> GetPagedAsync(int page = 0)
+    public async Task<ErrorOr<PaginationModel<TypeModel>>> GetPagedAsync(int page = 0)
     {
         page = page < 0 ? 0 : page - 1;
 
-        var motorcycles = await dbContext.Motorcycles.AsNoTracking()
-                                                     .Include(x => x.Manufacturer)
-                                                     .Include(x => x.Type)
+        var types = await dbContext.Types.AsNoTracking()
                                                      .Skip(page * ROW_COUNT)
                                                      .Take(ROW_COUNT)
-                                                     .Select(x => new MotorcycleModel(x))
+                                                     .Select(x => new TypeModel(x))
                                                      .ToListAsync();
 
-        var paginationModel = new PaginationModel<MotorcycleModel>
+        var paginationModel = new PaginationModel<TypeModel>
         {
-            Items = motorcycles,
-            Count = await dbContext.Motorcycles.CountAsync()
+            Items = types,
+            Count = await dbContext.Types.CountAsync()
         };
 
         return paginationModel;

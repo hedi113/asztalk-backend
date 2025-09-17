@@ -1,4 +1,13 @@
-﻿namespace Solution.Services;
+﻿using ErrorOr;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
+using Google.Apis.Services;
+using Solution.Core.Interfaces;
+using Solution.Core.Models;
+using Solution.Core.Models.Settings;
+
+namespace Solution.Services.Services;
 
 public class GoogleDriveService(GoogleDriveSettings googleDriveSettings) : IGoogleDriveService
 {
@@ -6,7 +15,7 @@ public class GoogleDriveService(GoogleDriveSettings googleDriveSettings) : IGoog
     {
         var service = CreateGoogleDriveService();
 
-        if(service is null)
+        if (service is null)
         {
             return Error.NotFound(description: "Google Drive Service is down");
         }
@@ -16,7 +25,7 @@ public class GoogleDriveService(GoogleDriveSettings googleDriveSettings) : IGoog
         var fileMetaData = new Google.Apis.Drive.v3.Data.File()
         {
             Name = file.FileName,
-            Parents = new List<string> { googleDriveSettings.StudentFolderId }
+            Parents = new List<string> { googleDriveSettings.RootFolderId }
         };
 
         var mimeType = GetMimeType(file.ContentType);

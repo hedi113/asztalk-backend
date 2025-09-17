@@ -1,7 +1,8 @@
 ﻿namespace Solution.DesktopApp.ViewModels;
 
 public partial class AddTypeViewModel(
-    AppDbContext dbContext) : TypeModel, IQueryAttributable
+    AppDbContext dbContext,
+    ITypeService typeService) : TypeModel, IQueryAttributable
 {
     #region life cycle commands
     public IAsyncRelayCommand AppearingCommand => new AsyncRelayCommand(OnAppearingkAsync);
@@ -23,6 +24,9 @@ public partial class AddTypeViewModel(
 
     private delegate Task ButtonActionDelagate();
     private ButtonActionDelagate asyncButtonAction;
+
+    [ObservableProperty]
+    private string title;
 
     [ObservableProperty]
     private string name;

@@ -29,8 +29,18 @@
               <FontImageSource Glyph="&#x25B6;" FontFamily="Arial" Color="Black"/>
             </MenuFlyoutItem.IconImageSource>
           </MenuFlyoutItem>
-      
-          <MenuFlyoutItem Text="List All" Command="{Binding ListAllMotorcyclesCommand}">
+            <MenuFlyoutItem Text="Add New Manufacturer" Command="{Binding AddNewManufacturerCommand}">
+                <MenuFlyoutItem.IconImageSource>
+                    <FontImageSource Glyph="&#x25B6;" FontFamily="Arial" Color="Black"/>
+                </MenuFlyoutItem.IconImageSource>
+            </MenuFlyoutItem>
+            <MenuFlyoutItem Text="Add New Type" Command="{Binding AddNewTypeCommand}">
+                <MenuFlyoutItem.IconImageSource>
+                    <FontImageSource Glyph="&#x25B6;" FontFamily="Arial" Color="Black"/>
+                </MenuFlyoutItem.IconImageSource>
+            </MenuFlyoutItem>
+
+            <MenuFlyoutItem Text="List All" Command="{Binding ListAllMotorcyclesCommand}">
             <MenuFlyoutItem.IconImageSource>
               <FontImageSource Glyph="&#x25B6;" FontFamily="Arial" Color="Black" />
             </MenuFlyoutItem.IconImageSource>

@@ -1,6 +1,6 @@
 ﻿namespace Solution.Services;
 
-public class MotorcycleService(AppDbContext dbContext) : ITypeService
+public class MotorcycleService(AppDbContext dbContext) : IMotorcycleService
 {
     private const int ROW_COUNT = 10;
 

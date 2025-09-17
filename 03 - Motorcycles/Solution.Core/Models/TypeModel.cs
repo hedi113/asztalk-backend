@@ -8,6 +8,11 @@ public partial class TypeModel : ObservableObject
     [ObservableProperty]
     private string name;
 
+    public TypeModel()
+    {
+        
+    }
+
     public TypeModel(int Id, string Name)
     {
         id = Id;
@@ -23,5 +28,14 @@ public partial class TypeModel : ObservableObject
 
         id = entity.Id;
         name = entity.Name;
+    }
+
+    public MotorcycleTypeEntity ToEntity() 
+    {
+        return new MotorcycleTypeEntity
+        {
+            Id = Id,
+            Name = Name
+        };
     }
 }

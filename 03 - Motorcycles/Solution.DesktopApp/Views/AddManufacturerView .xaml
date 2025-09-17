@@ -39,8 +39,7 @@
                                                 ConverterParameter={x:Static validator:ManufacturerModelValidator.ManufacturerProperty} 
                                             }">
                 <Entry
-                    Value="{Binding Name}"
-                    ShowClearButton="True">
+                    Text="{Binding Name}">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior
                             EventName="ValueChanged"

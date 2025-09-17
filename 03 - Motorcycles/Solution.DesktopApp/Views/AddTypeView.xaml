@@ -9,7 +9,7 @@
              xmlns:behaviors="clr-namespace:Solution.DesktopApp.Behaviors"
              xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
              x:Class="Solution.DesktopApp.Views.AddTypeView"
-             x:DataType="viewModels:CreateOrEditMotorcycleViewModel"
+             x:DataType="viewModels:AddTypeViewModel"
              x:Name="this">
 
     <ContentPage.Behaviors>
@@ -39,8 +39,7 @@
                                                 ConverterParameter={x:Static validator:TypeModelValidator.TypeProperty} 
                                             }">
                 <Entry
-                    Value="{Binding Name}"
-                    ShowClearButton="True">
+                    Text="{Binding Name}">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior
                             EventName="ValueChanged"
