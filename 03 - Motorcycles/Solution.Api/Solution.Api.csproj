@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Configurations\DIConfigurations.Configuration.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Configurations\DIConfigurations.Configuration.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 	  <PackageReference Include="ErrorOr" Version="2.0.1" />
@@ -65,6 +57,7 @@
     <ProjectReference Include="..\Solution.Core\Solution.Core.csproj" />
     <ProjectReference Include="..\Solution.Database\Solution.Database.csproj" />
     <ProjectReference Include="..\Solution.Services\Solution.Services.csproj" />
+    <ProjectReference Include="..\Solution.Validators\Solution.Validators.csproj" />
   </ItemGroup>
 
 </Project>

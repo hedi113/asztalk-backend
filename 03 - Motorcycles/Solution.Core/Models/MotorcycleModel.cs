@@ -5,30 +5,39 @@ namespace Solution.Core.Models;
 public partial class MotorcycleModel : ObservableObject
 {
     [ObservableProperty]
+    [JsonPropertyName("id")]
     public string id;
 
     [ObservableProperty]
+    [JsonPropertyName("imageId")]
     public string imageId;
 
     [ObservableProperty]
+    [JsonPropertyName("webContentLink")]
     public string webContentLink;
 
     [ObservableProperty]
+    [JsonPropertyName("manufacturer")]
     public ManufacturerModel manufacturer;
 
     [ObservableProperty]
+    [JsonPropertyName("type")]
     public TypeModel type;
 
     [ObservableProperty]
+    [JsonPropertyName("model")]
     public string model;
 
     [ObservableProperty]
+    [JsonPropertyName("cubic")]
     public int? cubic;
 
     [ObservableProperty]
+    [JsonPropertyName("releaseYear")]
     public int? releaseYear;
 
     [ObservableProperty]
+    [JsonPropertyName("numberOfCylinders")]
     public int? numberOfCylinders;
 
     public MotorcycleModel() { }
