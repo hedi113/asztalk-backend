@@ -1,1 +1,4 @@
 szorgalmi : megoldani, hogy csak olyan id-t fogadjon az adatbázis, ami már benne van asyncronous validation: https://docs.fluentvalidation.net/en/latest/async.html
+
+
+A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 52 - Unable to locate a Local Database Runtime installation. Verify that SQL Server Express is properly installed and that the Local Database Runtime feature is enabled.) (Framework Microsoft SqlClient Data Provider)
