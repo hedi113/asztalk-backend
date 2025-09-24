@@ -4,3 +4,5 @@ global using System.Reflection;
 global using FluentValidation.AspNetCore;
 global using FluentValidation.Results;
 global using Microsoft.AspNetCore.Mvc;
+global using Azure.Core;
+global using Microsoft.AspNetCore.Http;

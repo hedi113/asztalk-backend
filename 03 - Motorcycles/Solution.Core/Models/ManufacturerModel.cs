@@ -3,9 +3,11 @@
 public partial class ManufacturerModel : ObservableObject
 {
     [ObservableProperty]
+    [JsonPropertyName("id")]
     private int id;
 
     [ObservableProperty]
+    [JsonPropertyName("name")]
     private string name;
 
     public ManufacturerModel()
@@ -13,6 +15,7 @@ public partial class ManufacturerModel : ObservableObject
         
     }
 
+    
     public ManufacturerModel(uint id, string name)
     {
         id = id;

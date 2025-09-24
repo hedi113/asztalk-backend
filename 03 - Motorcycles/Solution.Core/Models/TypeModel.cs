@@ -3,9 +3,11 @@
 public partial class TypeModel : ObservableObject
 {
     [ObservableProperty]
+    [JsonPropertyName("id")]
     private int id;
 
     [ObservableProperty]
+    [JsonPropertyName("name")]
     private string name;
 
     public TypeModel()

@@ -1,0 +1,1 @@
+szorgalmi : megoldani, hogy csak olyan id-t fogadjon az adatbázis, ami már benne van asyncronous validation: https://docs.fluentvalidation.net/en/latest/async.html

@@ -9,6 +9,6 @@ public class ManufacturerModelValidator : AbstractValidator<ManufacturerModel>
 
     public ManufacturerModelValidator()
     {
-        RuleFor(x => x.Name).NotEmpty().WithMessage("Name of manufacturer is required!");
+        //RuleFor(x => x.Name).NotEmpty().WithMessage("Name of manufacturer is required!");
     }
 }

@@ -6,9 +6,11 @@ public static class DIConfigurations
     {
         builder.Services.AddHttpContextAccessor();
 
-        builder.Services.AddTransient<IValidatorInterceptor, FluentValidationInterceptor>();
-
         builder.Services.AddTransient<IMotorcycleService, MotorcycleService>();
+
+        builder.Services.AddTransient<IManufacturerService, ManufacturerService>();
+
+        builder.Services.AddTransient<ITypeService, TypeService>();
 
         return builder;
     }

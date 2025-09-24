@@ -11,4 +11,4 @@ global using Solution.Core.Models;
 global using Newtonsoft.Json;
 global using FluentValidation;
 global using FluentValidation.AspNetCore;
-global using Solution.Validators.Interceptors;
+global using System.ComponentModel.DataAnnotations;

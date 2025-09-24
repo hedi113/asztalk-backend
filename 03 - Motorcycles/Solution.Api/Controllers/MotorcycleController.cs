@@ -1,5 +1,5 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
+
 
 namespace Solution.Api.Controllers;
 
@@ -10,6 +10,18 @@ public class MotorcycleController(IMotorcycleService motorcycleService) : BaseCo
     public async Task<IActionResult> GetAllAsync()
     {
         var result = await motorcycleService.GetAllAsync();
+
+        return result.Match(
+            result => Ok(result),
+            errors => Problem(errors)
+        );
+    }
+
+    [HttpGet]
+    [Route("api/motorcycle/{page}")]
+    public async Task<IActionResult> GetPagedAsync([FromRoute] int page = 0)
+    {
+        var result = await motorcycleService.GetPagedAsync(page);
 
         return result.Match(
             result => Ok(result),
