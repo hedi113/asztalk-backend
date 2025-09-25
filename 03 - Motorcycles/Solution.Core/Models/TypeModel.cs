@@ -15,12 +15,6 @@ public partial class TypeModel : ObservableObject
         
     }
 
-    public TypeModel(int Id, string Name)
-    {
-        id = Id;
-        name = Name;
-    }
-
     public TypeModel(MotorcycleTypeEntity entity)
     {
         if (entity is null)
@@ -39,5 +33,12 @@ public partial class TypeModel : ObservableObject
             Id = Id,
             Name = Name
         };
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is TypeModel model &&
+            this.Id == model.Id &&
+            this.Name == model.Name;
     }
 }

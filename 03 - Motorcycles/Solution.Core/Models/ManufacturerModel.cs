@@ -15,13 +15,6 @@ public partial class ManufacturerModel : ObservableObject
         
     }
 
-    
-    public ManufacturerModel(uint id, string name)
-    {
-        id = id;
-        name = name;
-    }
-
     public ManufacturerModel(ManufacturerEntity entity)
     {
         if(entity is null)
@@ -41,5 +34,10 @@ public partial class ManufacturerModel : ObservableObject
             Name = Name
         };
     }
-
+    public override bool Equals(object? obj)
+    {
+        return obj is ManufacturerModel model &&
+            this.Id == model.Id &&
+            this.Name == model.Name; 
+    }
 }

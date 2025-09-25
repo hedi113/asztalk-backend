@@ -13,8 +13,8 @@
              x:Name="this">
 
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
-        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"  BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing"  BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
     </ContentPage.Behaviors>
 
     <Grid>
@@ -27,25 +27,23 @@
             <Label Text="{Binding Title}" Style="{StaticResource PageTitle}" />
 
             <sf:SfTextInputLayout Hint="Manufacturer name"
-                                  ContainerType="Outlined"
-                                  ErrorText="{
-                                                Binding ValidationResult,
-                                                Converter={StaticResource ValidationResultToErrorMessageConverter},
-                                                ConverterParameter={x:Static validator:ManufacturerModelValidator.ManufacturerProperty}
-                                             }"
-                                  HasError="{
-                                                Binding ValidationResult,
-                                                Converter={StaticResource ValidationResultToHasErrorConverter},
-                                                ConverterParameter={x:Static validator:ManufacturerModelValidator.ManufacturerProperty} 
-                                            }">
-                <Entry
-                    Text="{Binding Name}">
+                ContainerType="Outlined"
+                ErrorText="{
+                         Binding ValidationResult,
+                         Converter={StaticResource ValidationResultToErrorMessageConverter},
+                         ConverterParameter={x:Static validator:ManufacturerModelValidator.ManufacturerProperty}
+                         }"
+                HasError="{
+                         Binding ValidationResult,
+                         Converter={StaticResource ValidationResultToHasErrorConverter},
+                         ConverterParameter={x:Static validator:ManufacturerModelValidator.ManufacturerProperty} 
+                         }">
+                <Entry Text="{Binding Name}">
                     <Entry.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            EventName="ValueChanged"
-                            BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
-                            Command="{Binding ValidateCommand}"
-                            CommandParameter="{x:Static validator:ManufacturerModelValidator.ManufacturerProperty}"/>
+                        <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                 BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                 Command="{Binding ValidateCommand}"
+                                 CommandParameter="{x:Static validator:ManufacturerModelValidator.ManufacturerProperty}"/>
                     </Entry.Behaviors>
                 </Entry>
             </sf:SfTextInputLayout>

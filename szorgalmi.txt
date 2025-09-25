@@ -2,3 +2,26 @@ szorgalmi : megoldani, hogy csak olyan id-t fogadjon az adatbázis, ami már ben
 
 
 A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 52 - Unable to locate a Local Database Runtime installation. Verify that SQL Server Express is properly installed and that the Local Database Runtime feature is enabled.) (Framework Microsoft SqlClient Data Provider)
+
+.\\sqlexpress
+
+
+    AppDbContext _appDbContext;
+
+        RuleFor(x => x.Id).MustAsync(async (id, cancellation) =>
+        {
+            MotorcycleTypeEntity? type = await _appDbContext.Types.FindAsync(new object?[] { id }, cancellationToken: cancellation);
+
+            bool exists = false;
+
+            if (type != null)
+            {
+                return exists;
+            }
+            else
+            {
+                return !exists;
+            }
+        }).WithMessage("ID Must be unique");
+
+atila.vastag@outlook.com
