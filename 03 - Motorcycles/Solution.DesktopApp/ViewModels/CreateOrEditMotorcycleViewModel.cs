@@ -37,9 +37,6 @@ public partial class CreateOrEditMotorcycleViewModel(
     private IList<TypeModel> types = [];
 
     [ObservableProperty]
-    private IList<uint> cylinders = [1, 2, 3, 4, 6, 8];
-
-    [ObservableProperty]
     private ImageSource image;
 
     private FileResult selectedFile = null;

@@ -28,9 +28,6 @@ public partial class AddTypeViewModel(
     [ObservableProperty]
     private string title;
 
-    [ObservableProperty]
-    private string name;
-
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         bool hasValue = query.TryGetValue("Type", out object result);

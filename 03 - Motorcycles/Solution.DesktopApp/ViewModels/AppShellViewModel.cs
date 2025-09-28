@@ -12,6 +12,8 @@ public partial class AppShellViewModel
     public IAsyncRelayCommand AddNewManufacturerCommand => new AsyncRelayCommand(OnAddNewManufacturerAsync);
 
     public IAsyncRelayCommand ListAllMotorcyclesCommand => new AsyncRelayCommand(OnListAllMotorcyclesAsync);
+    public IAsyncRelayCommand ListAllManufacturersCommand => new AsyncRelayCommand(OnListAllManufacturersAsync);
+    public IAsyncRelayCommand ListAllTypesCommand => new AsyncRelayCommand(OnListAllTypesAsync);
 
 
     private async Task OnExitAsync() => Application.Current.Quit();
@@ -37,5 +39,15 @@ public partial class AppShellViewModel
     {
         Shell.Current.ClearNavigationStack();
         await Shell.Current.GoToAsync(MotorcycleListView.Name);
+    }
+    private async Task OnListAllManufacturersAsync()
+    {
+        Shell.Current.ClearNavigationStack();
+        await Shell.Current.GoToAsync(ManufacturerListView.Name);
+    }
+    private async Task OnListAllTypesAsync()
+    {
+        Shell.Current.ClearNavigationStack();
+        await Shell.Current.GoToAsync(TypeListView.Name);
     }
 }

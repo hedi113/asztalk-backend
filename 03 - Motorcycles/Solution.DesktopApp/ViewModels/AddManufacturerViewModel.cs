@@ -30,8 +30,7 @@ public partial class AddManufacturerViewModel(IManufacturerService manufacturerS
     private delegate Task ButtonActionDelagate();
     private ButtonActionDelagate asyncButtonAction;
 
-    [ObservableProperty]
-    private string name;
+ 
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
