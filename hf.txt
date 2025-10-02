@@ -1,1 +1,1 @@
-hf - motorcycles ctrl c + v csak nem motorcycles, vmi más
+hf - api a legutolsó apis hf-ből ugyanolyanra meg kell csinálni mint a motorcycle-t (vegetables)
