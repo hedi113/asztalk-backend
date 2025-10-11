@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Toolkit.NumericEntry;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:viewModels="clr-namespace:Solution.DesktopApp.ViewModels"
+             xmlns:models="clr-namespace:Solution.Core.Models;assembly=Solution.Core"
+             xmlns:behaviors="clr-namespace:Solution.DesktopApp.Behaviors"
+             xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
+             x:Class="Solution.DesktopApp.Views.AddCategoryView"
+             x:DataType="viewModels:AddCategoryViewModel"
+             x:Name="this">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}" />
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}" />
+    </ContentPage.Behaviors>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Orientation="Vertical" Grid.Column="1">
+            <Label Text="{Binding Title}" Style="{StaticResource PageTitle}" />
+
+            <sf:SfTextInputLayout Hint="Name of category"
+                    ContainerType="Outlined"
+                    ErrorText="{
+                        Binding ValidationResult,
+                        Converter={StaticResource ValidationResultToErrorMessageConverter},
+                        ConverterParameter={x:Static validator:CategoryModelValidator.CategoryProperty}
+                        }"
+                    HasError="{
+                        Binding ValidationResult,
+                        Converter={StaticResource ValidationResultToHasErrorConverter},
+                        ConverterParameter={x:Static validator:CategoryModelValidator.CategoryProperty} 
+                        }">
+                <Entry Text="{Binding Name}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                Command="{Binding ValidateCommand}"
+                            CommandParameter="{x:Static validator:CategoryModelValidator.CategoryProperty}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </sf:SfTextInputLayout>
+
+
+            <VerticalStackLayout Style="{StaticResource FormLineContainer}">
+                <Button Text="Submit" Command="{Binding SubmitCommand}" WidthRequest="250"/>
+            </VerticalStackLayout>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

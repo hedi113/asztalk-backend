@@ -22,3 +22,18 @@ hf/.vs
 17 - IO feladatok/04 - Konyvek/konyvek/konyvek/bin
 17 - IO feladatok/04 - Konyvek/konyvek/konyvek/obj
 17 - IO feladatok/04 - Konyvek/konyvek/.vs
+Book hf/.vs
+Book hf/Solution.Api/bin
+Book hf/Solution.Api/obj
+Book hf/Solution.Core/bin
+Book hf/Solution.Core/obj
+Book hf/Solution.DataBase/bin
+Book hf/Solution.DesktopApp/bin
+Book hf/Solution.PdfGenerator/bin
+Book hf/Solution.DataBase/obj
+Book hf/Solution.DesktopApp/obj
+Book hf/Solution.PdfGenerator/obj
+Book hf/Solution.Services/bin
+Book hf/Solution.Validators/bin
+Book hf/Solution.Validators/obj
+Book hf/Solution.Services/obj

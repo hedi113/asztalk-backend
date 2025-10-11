@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Toolkit.NumericEntry;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:viewModels="clr-namespace:Solution.DesktopApp.ViewModels"
+             xmlns:models="clr-namespace:Solution.Core.Models;assembly=Solution.Core"
+             xmlns:behaviors="clr-namespace:Solution.DesktopApp.Behaviors"
+             xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
+             x:Class="Solution.DesktopApp.Views.AddBookView"
+             x:DataType="viewModels:AddBookViewModel"
+             x:Name="this">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"/>
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing" />
+    </ContentPage.Behaviors>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <StackLayout Orientation="Vertical"
+                     Grid.Column="0"
+                     Style="{StaticResource FormLineContainer}"
+                     Margin="40">
+            <Border Stroke="{AppThemeBinding Light=Black, Dark=White}"
+                    StrokeThickness="2"
+                    Background="Transparent"
+                    Padding="0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Image Source="{Binding Image}" />
+            </Border>
+            <Button Text="Select an image for the cover"
+                    Margin="0,5"
+                    Command="{Binding ImageSelectCommand}" />
+        </StackLayout>
+
+        <StackLayout Orientation="Vertical" Grid.Column="1">
+            <Label Text="{Binding Title}" Style="{StaticResource PageTitle}" />
+
+            <sf:SfTextInputLayout Hint="Title of the book"
+                                  ContainerType="Outlined"
+                                  ErrorText="{
+                                        Binding ValidationResult,
+                                        Converter={StaticResource ValidationResultToErrorMessageConverter},
+                                        ConverterParameter={x:Static validator:BookModelValidator.TitleProperty}
+                                  }"
+                                  HasError="{
+                                        Binding ValidationResult,
+                                        Converter={StaticResource ValidationResultToHasErrorConverter},
+                                        ConverterParameter={x:Static validator:BookModelValidator.TitleProperty} 
+                                  }">
+                    <Entry Text="{Binding Title}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                Command="{Binding ValidateCommand}"
+                                CommandParameter="{x:Static validator:BookModelValidator.TitleProperty}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </sf:SfTextInputLayout>
+
+            <sf:SfTextInputLayout Hint="Author"
+                                  ContainerType="Outlined"
+                                  OutlineCornerRadius="8"
+                                  ErrorText="{
+                                                Binding ValidationResult,
+                                                Converter={StaticResource ValidationResultToErrorMessageConverter},
+                                                ConverterParameter={x:Static validator:BookModelValidator.AuthorProperty}
+                                             }"
+                                  HasError="{
+                                                Binding ValidationResult,
+                                                Converter={StaticResource ValidationResultToHasErrorConverter},
+                                                ConverterParameter={x:Static validator:BookModelValidator.AuthorProperty} 
+                                            }">
+                <Picker ItemsSource="{Binding Authors}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding Author}">
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                        BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                                        Command="{Binding ValidateCommand}"
+                                                        CommandParameter="{x:Static validator:BookModelValidator.AuthorProperty}"/>
+                    </Picker.Behaviors>
+                </Picker>
+            </sf:SfTextInputLayout>
+
+            
+            
+            <sf:SfTextInputLayout Hint="Category"
+                                  ContainerType="Outlined"
+                                  OutlineCornerRadius="8"
+                                  ErrorText="{
+                                                Binding ValidationResult,
+                                                Converter={StaticResource ValidationResultToErrorMessageConverter},
+                                                ConverterParameter={x:Static validator:BookModelValidator.CategoryProperty}
+                                             }"
+                                  HasError="{
+                                                Binding ValidationResult,
+                                                Converter={StaticResource ValidationResultToHasErrorConverter},
+                                                ConverterParameter={x:Static validator:BookModelValidator.CategoryProperty} 
+                                            }">
+                <Picker ItemsSource="{Binding Categories}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding Category}">
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged"
+                                                        BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                                        Command="{Binding ValidateCommand}"
+                                                        CommandParameter="{x:Static validator:BookModelValidator.CategoryProperty}"/>
+                    </Picker.Behaviors>
+                </Picker>
+            </sf:SfTextInputLayout>
+
+
+
+            <sf:SfTextInputLayout Hint="Number of pages"
+                                  ContainerType="Outlined"
+                                  ErrorText="{
+                                                Binding ValidationResult,
+                                                Converter={StaticResource ValidationResultToErrorMessageConverter},
+                                                ConverterParameter={x:Static validator:BookModelValidator.PageNumberProperty}
+                                             }"
+                                  HasError="{
+                                                Binding ValidationResult,
+                                                Converter={StaticResource ValidationResultToHasErrorConverter},
+                                                ConverterParameter={x:Static validator:BookModelValidator.PageNumberProperty} 
+                                            }">
+                <editors:SfNumericEntry
+                    Value="{Binding PageNumber}"
+                    ShowClearButton="True"
+                    CustomFormat="N0">
+                    <editors:SfNumericEntry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            EventName="ValueChanged"
+                            BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                            Command="{Binding ValidateCommand}"
+                            CommandParameter="{x:Static validator:BookModelValidator.PageNumberProperty}"/>
+                    </editors:SfNumericEntry.Behaviors>
+                </editors:SfNumericEntry>
+            </sf:SfTextInputLayout>
+
+
+            <sf:SfTextInputLayout Hint="Publisher"
+                      ContainerType="Outlined"
+                      ErrorText="{
+                                    Binding ValidationResult,
+                                    Converter={StaticResource ValidationResultToErrorMessageConverter},
+                                    ConverterParameter={x:Static validator:BookModelValidator.PublisherProperty}
+                                 }"
+                      HasError="{
+                                    Binding ValidationResult,
+                                    Converter={StaticResource ValidationResultToHasErrorConverter},
+                                    ConverterParameter={x:Static validator:BookModelValidator.PublisherProperty} 
+                                }">
+                <Entry Text="{Binding Publisher}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                            BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                            Command="{Binding ValidateCommand}"
+                                            CommandParameter="{x:Static validator:BookModelValidator.PublisherProperty}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </sf:SfTextInputLayout>
+
+            <sf:SfTextInputLayout Hint="Release date"
+                    ContainerType="Outlined"
+                    ErrorText="{
+                        Binding ValidationResult,
+                        Converter={StaticResource ValidationResultToErrorMessageConverter},
+                        ConverterParameter={x:Static validator:BookModelValidator.ReleaseDateProperty}
+                     }"
+                    HasError="{
+                        Binding ValidationResult,
+                        Converter={StaticResource ValidationResultToHasErrorConverter},
+                        ConverterParameter={x:Static validator:BookModelValidator.ReleaseDateProperty} 
+                    }">
+
+                <DatePicker Date="{Binding ReleaseDate}"/>
+
+            </sf:SfTextInputLayout>
+
+            <VerticalStackLayout Style="{StaticResource FormLineContainer}">
+                <Button Text="Submit" Command="{Binding SubmitCommand}" WidthRequest="250"/>
+            </VerticalStackLayout>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
