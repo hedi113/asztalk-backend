@@ -18,7 +18,7 @@ public class BookController(IBookService bookService) : BaseController
     }
 
     [HttpGet]
-    [Route("api/book/{page}")]
+    [Route("api/book/page/{page}")]
     public async Task<IActionResult> GetPagedAsync([FromRoute] int page = 0)
     {
         var result = await bookService.GetPagedAsync(page);
