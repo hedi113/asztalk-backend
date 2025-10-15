@@ -25,7 +25,7 @@
                Style="{x:StaticResource PageTitle}" />
        
         <ScrollView Grid.Row="1">
-            <CollectionView ItemsSource="{Binding Manufacturers}" Margin="50,0,50,0">
+            <CollectionView ItemsSource="{Binding Authors}" Margin="50,0,50,0">
                 <CollectionView.Header>
                     <Grid BackgroundColor="{AppThemeBinding Light=Black, Dark=WhiteSmoke}"
                           Padding="10,0,10,0">
@@ -33,7 +33,8 @@
                             <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="80" />
                             <ColumnDefinition Width="80" />
                         </Grid.ColumnDefinitions>
 
@@ -41,7 +42,7 @@
                                Text="Name"
                                HorizontalTextAlignment="Center"
                                Style="{x:StaticResource TableHeader}" />
-                        <Label Grid.Column="0"
+                        <Label Grid.Column="1"
                                Text="Birthyear"
                                HorizontalTextAlignment="Center"
                                Style="{x:StaticResource TableHeader}" />

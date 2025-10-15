@@ -12,7 +12,7 @@ public partial class AuthorModel : ObservableObject
 
     [ObservableProperty]
     [JsonPropertyName("birthYear")]
-    private int birthYear;
+    private int? birthYear;
 
     public AuthorModel()
     {
@@ -37,7 +37,7 @@ public partial class AuthorModel : ObservableObject
         {
             Id = Id,
             Name = Name,
-            BirthYear = BirthYear,
+            BirthYear = BirthYear.Value,
         };
     }
     public override bool Equals(object? obj)

@@ -8,7 +8,7 @@ public class AuthorService(AppDbContext dbContext) : IAuthorService
 
     public async Task<ErrorOr<AuthorModel>> CreateAsync(AuthorModel model)
     {
-        bool exists = await dbContext.Authors.AnyAsync(x => x.Name == model.Name);
+        bool exists = await dbContext.Authors.AnyAsync(x => x.Name == model.Name && x.BirthYear == model.BirthYear);
 
         if (exists)
         {
@@ -30,7 +30,7 @@ public class AuthorService(AppDbContext dbContext) : IAuthorService
     {
         var result = await dbContext.Authors.AsNoTracking()
                                                 .Where(x => x.Id == model.Id)
-                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Name, model.Name));
+                                                .ExecuteUpdateAsync(x => x.SetProperty(p => p.Name, model.Name).SetProperty(p => p.BirthYear, model.BirthYear));
         return result > 0 ? Result.Success : Error.NotFound();
     }
 

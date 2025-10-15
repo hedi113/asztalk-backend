@@ -35,7 +35,7 @@
                    Text="{Binding Book.Category.Name, Source={x:Reference this}}" 
                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
             <Label Grid.Column="4"
-                   Text="{Binding Book.PageNumber.Value, Source={x:Reference this}}" 
+                   Text="{Binding Book.PageNumber, Source={x:Reference this}}" 
                    HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
             <Label Grid.Column="5"
                    Text="{Binding Book.ReleaseDate, Source={x:Reference this}}" 

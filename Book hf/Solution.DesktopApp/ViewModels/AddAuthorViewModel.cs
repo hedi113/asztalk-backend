@@ -103,7 +103,7 @@ public partial class AddAuthorViewModel(IAuthorService authorService,
     private void ClearForm()
     {
         this.Name = null;
-        this.BirthYear = 2000;
+        this.BirthYear = null;
     }
 
     private async Task OnValidateAsync(string propertyName)

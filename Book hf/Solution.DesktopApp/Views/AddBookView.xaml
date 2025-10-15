@@ -40,7 +40,7 @@
         </StackLayout>
 
         <StackLayout Orientation="Vertical" Grid.Column="1">
-            <Label Text="{Binding Title}" Style="{StaticResource PageTitle}" />
+            <Label Text="{Binding PageTitle}" Style="{StaticResource PageTitle}" />
 
             <sf:SfTextInputLayout Hint="Title of the book"
                                   ContainerType="Outlined"

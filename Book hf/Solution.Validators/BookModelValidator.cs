@@ -26,7 +26,5 @@ public class BookModelValidator : BaseValidators<BookModel>
         RuleFor(x => x.ReleaseDate).NotNull().WithMessage("A release date must be selected!");
         RuleFor(x => x.Author).NotNull().WithMessage("An author must be selected!");
         RuleFor(x => x.Category).NotNull().WithMessage("Category is required!");
-        RuleFor(x => x.Author.Id).GreaterThan(0).NotNull().WithMessage("Manufacturer id has to be greater than 0!");
-        RuleFor(x => x.Category.Id).GreaterThan(0).NotNull().WithMessage("Type id has to be greater than 0!");
     }
 }

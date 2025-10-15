@@ -32,19 +32,19 @@
                 ErrorText="{
                          Binding ValidationResult,
                          Converter={StaticResource ValidationResultToErrorMessageConverter},
-                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorProperty}
+                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty}
                          }"
                 HasError="{
                          Binding ValidationResult,
                          Converter={StaticResource ValidationResultToHasErrorConverter},
-                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorProperty} 
+                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty} 
                          }">
                 <Entry Text="{Binding Name}">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="TextChanged"
                                  BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
                                  Command="{Binding ValidateCommand}"
-                                 CommandParameter="{x:Static validator:AuthorModelValidator.AuthorProperty}"/>
+                                 CommandParameter="{x:Static validator:AuthorModelValidator.AuthorNameProperty}"/>
                     </Entry.Behaviors>
                 </Entry>
             </sf:SfTextInputLayout>
@@ -54,12 +54,12 @@
                 ErrorText="{
                         Binding ValidationResult,
                         Converter={StaticResource ValidationResultToErrorMessageConverter},
-                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorProperty}
+                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
                         }"
                 HasError="{
                         Binding ValidationResult,
                         Converter={StaticResource ValidationResultToHasErrorConverter},
-                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorProperty} 
+                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
                         }">
                     <editors:SfNumericEntry
                         Value="{Binding BirthYear}"
@@ -70,7 +70,7 @@
                                 EventName="ValueChanged"
                                 BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
                                 Command="{Binding ValidateCommand}"
-                                CommandParameter="{x:Static validator:AuthorModelValidator.AuthorProperty}"/>
+                                CommandParameter="{x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}"/>
                     </editors:SfNumericEntry.Behaviors>
                 </editors:SfNumericEntry>
             </sf:SfTextInputLayout>

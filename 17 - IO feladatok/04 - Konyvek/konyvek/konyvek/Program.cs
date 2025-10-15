@@ -46,4 +46,22 @@ var booksPublishedIn20thCentury = books.Where(x => x.ReleaseYear >= 1900)
 
 await File.WriteAllLinesAsync(path: "1900.txt", encoding: Encoding.UTF8, contents: booksPublishedIn20thCentury);
 
+//Rendezzük az adatokat a könyvek oldalainak száma szerint csökkenő sorrendbe és a sorbarakott.txt állományba mentsük el.
+var sortedByPages = books.OrderByDescending(x => x.PageNumber).Select(x => x.ToFullString());
+await File.WriteAllLinesAsync(path: "sorbarakott.txt", encoding: Encoding.UTF8, contents: sortedByPages);
+
+//„kategoriak.txt” állományba mentse el a könyveket téma szerint.
+var groupByTheme = books.GroupBy(x => x.Theme).ToDictionary(k => k.Key, v => v.ToList());
+var stringBuilder = new StringBuilder();
+foreach(var group in groupByTheme)
+{
+    stringBuilder.AppendLine($"{group.Key}:");
+    foreach(var book in group.Value)
+    {
+        stringBuilder.AppendLine($"\t- {book.ToString()}");
+    }
+}
+
+await File.WriteAllTextAsync(path: "kategoriak.txt", encoding: Encoding.UTF8, contents: stringBuilder.ToString());
+
 Console.ReadKey();

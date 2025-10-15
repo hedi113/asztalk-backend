@@ -30,7 +30,7 @@ public partial class AddBookViewModel(
     private ButtonActionDelagate asyncButtonAction;
 
     [ObservableProperty]
-    private string title;
+    private string pageTitle;
 
     [ObservableProperty]
     private IList<AuthorModel> authors = [];
@@ -53,7 +53,7 @@ public partial class AddBookViewModel(
         if(!hasValue)
         {
             asyncButtonAction = OnSaveAsync;
-            Title = "Add new book";
+            PageTitle = "Add new book";
             return;
         }
 

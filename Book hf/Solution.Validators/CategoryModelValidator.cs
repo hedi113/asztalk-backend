@@ -13,6 +13,6 @@ public class CategoryModelValidator : BaseValidators<CategoryModel>
             RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required!");
         }
 
-        RuleFor(x => x.Name).NotEmpty().WithMessage("Name of type is required!");
+        RuleFor(x => x.Name).NotEmpty().WithMessage("Name of category is required!");
     }
 }
