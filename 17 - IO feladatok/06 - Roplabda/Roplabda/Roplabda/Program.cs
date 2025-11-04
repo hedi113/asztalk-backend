@@ -71,6 +71,18 @@ foreach (var nationality in membersByNationality)
 
 await File.WriteAllTextAsync(path: "nemzetisegek.txt", encoding: Encoding.UTF8, contents: stringBuilder.ToString());
 
+//atlagnalmagasabbak.txt állományba keressük azon játékosok nevét és magasságát akik magasabbak mint az „adatbázisban” szereplő játékosok átlagos magasságánál.
+
+double avgHeight = volleyballPlayers.Average(x => x.Height);
+var playersWithAboveAvgHeight = volleyballPlayers.Where(x => x.Height > avgHeight).ToList();
+stringBuilder = new StringBuilder();
+foreach (var player in playersWithAboveAvgHeight)
+{
+    stringBuilder.AppendLine($"{player.ToString()}");
+}
+
+await File.WriteAllTextAsync(path: "atlagnalmagasabbak.txt", encoding: Encoding.UTF8, contents: stringBuilder.ToString());
+
 
 //- Állítsa növekvő sorrendbe a posztok szerint a játékosok ösz magasságát
 
@@ -78,7 +90,6 @@ var sortedMembers = volleyballPlayers.OrderBy(x => x.Height).GroupBy(x => x.Nati
 
 
 //- Egy szöveges állományba, „alacsonyak.txt” keresse ki a játékosok átlagmagasságától alacsonyabb játékosokat. Az állomány tartalmazza a játékosok nevét,  magasságát és hogy mennyivel alacsonyabbak az átlagnál, 2 tizedes pontossággal.
-double avgHeight = volleyballPlayers.Average(x => x.Height);
 var playersWithBelowAvgHeight = volleyballPlayers.Where(x => x.Height < avgHeight).ToList();
 stringBuilder = new StringBuilder();
 foreach(var player in playersWithBelowAvgHeight)
