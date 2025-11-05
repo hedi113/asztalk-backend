@@ -43,3 +43,19 @@ Book hf/Solution.Services/obj
 17 - IO feladatok/11 - NB1/NB1/NB1/bin
 17 - IO feladatok/06 - Roplabda/Roplabda/Roplabda/obj
 17 - IO feladatok/06 - Roplabda/Roplabda/Roplabda/bin
+SAMPLE_BaseWithApi/.vs
+Szamla/.vs
+SAMPLE_BaseWithApi/Solution.Api/obj
+SAMPLE_BaseWithApi/Solution.Core/obj
+SAMPLE_BaseWithApi/Solution.DataBase/obj
+SAMPLE_BaseWithApi/Solution.DesktopApp/obj
+SAMPLE_BaseWithApi/Solution.PdfGenerator/obj
+SAMPLE_BaseWithApi/Solution.Services/obj
+SAMPLE_BaseWithApi/Solution.Validators/obj
+Szamla/Solution.Api/obj
+Szamla/Solution.Core/obj
+Szamla/Solution.DataBase/obj
+Szamla/Solution.DesktopApp/obj
+Szamla/Solution.PdfGenerator/obj
+Szamla/Solution.Services/obj
+Szamla/Solution.Validators/obj

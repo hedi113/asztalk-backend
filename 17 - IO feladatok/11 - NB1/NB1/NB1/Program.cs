@@ -7,37 +7,25 @@ var soccerPlayers = new List<Player>();
 
 foreach (var line in fileData)
 {
-    var data = line.Split('\t');
-    if (data.Length < 9 )
+    var data = line.Split('\t').ToList();
+    if (data.Count == 8)
     {
-        soccerPlayers.Add(new Player
-        {
-            ClubName = data[0],
-            Number = int.Parse(data[1]),
-            LastName = null,
-            FirstName = data[2],
-            DateOfBirth = DateTime.Parse(data[3]),
-            IsHungarian = (int.Parse(data[4]) == -1) ? true : false,
-            IsForeigner = (int.Parse(data[5]) == -1) ? true : false,
-            ValueOfPlayer = int.Parse(data[6]),
-            Post = data[7],
-        });
+        data.Insert(3, string.Empty);
     }
-    else
+
+    soccerPlayers.Add(new Player
     {
-        soccerPlayers.Add(new Player
-        {
-            ClubName = data[0],
-            Number = int.Parse(data[1]),
-            LastName = data[2],
-            FirstName = data[3],
-            DateOfBirth = DateTime.Parse(data[4]),
-            IsHungarian = (int.Parse(data[5]) == -1) ? true : false,
-            IsForeigner = (int.Parse(data[6]) == -1) ? true : false,
-            ValueOfPlayer = int.Parse(data[7]),
-            Post = data[8],
-        });
-    }
+        ClubName = data[0],
+        Number = int.Parse(data[1]),
+        LastName = data[2],
+        FirstName = data[3],
+        DateOfBirth = DateTime.Parse(data[4]),
+        IsHungarian = (int.Parse(data[5]) == -1) ? true : false,
+        IsForeigner = (int.Parse(data[6]) == -1) ? true : false,
+        ValueOfPlayer = int.Parse(data[7]),
+        Post = data[8],
+    });
+
 }
 
 //a) A kapusokon kívül mindenkit mezőnyjátékosnak tekintünk. Keresse ki a legidősebb mezőnyjátékos vezeték- és utónevét, valamint születési dátumát! (Feltételezheti, hogy csak egy ilyen játékos van.)
@@ -50,9 +38,9 @@ void OldestPlayer() {
 
 //b) Határozza meg hány magyar, külföldi és kettős állampolgárságú játékos van! 
 void Nationality() {
-    var hungarians = soccerPlayers.Count(x => x.IsHungarian == true && x.IsForeigner == false);
-    var foreigners = soccerPlayers.Count(x => x.IsForeigner == true && x.IsHungarian == false);
-    var both = soccerPlayers.Count(x => x.IsHungarian == true && x.IsForeigner == true);
+    var hungarians = soccerPlayers.Count(x => x.IsHungarian && !x.IsForeigner);
+    var foreigners = soccerPlayers.Count(x => x.IsForeigner && !x.IsHungarian);
+    var both = soccerPlayers.Count(x => x.IsHungarian && x.IsForeigner);
     Console.WriteLine($"Magyarok: {hungarians}\nKülföldiek: {foreigners}\nKettős álammpolgárságúak: {both}");
 }
 
@@ -60,14 +48,9 @@ void Nationality() {
 
 void ValueOfTeam()
 {
-    var playersByTeam = soccerPlayers.GroupBy(x => x.ClubName).ToDictionary(k => k.Key, v => v.ToList());
-    var teamWorth = new Dictionary<string, int>();
-    foreach(var team in playersByTeam)
-    {
-        teamWorth.Add(team.Key, team.Value.Sum(x => x.ValueOfPlayer));
-    }
+    var playersByTeam = soccerPlayers.GroupBy(x => x.ClubName).ToDictionary(k => k.Key, v => v.ToList().Sum(x => x.ValueOfPlayer));
 
-    foreach(var value in teamWorth)
+    foreach(var value in playersByTeam)
     {
         Console.WriteLine($"{value.Key} - {value.Value}");
     }
@@ -109,7 +92,7 @@ void BelowAvg()
 void SelectedSoccerPlayers()
 {
     var selectedSoccerPlayers = soccerPlayers.Where(x => DateTime.UtcNow.Year - x.DateOfBirth.Year > 18 && DateTime.UtcNow.Year - x.DateOfBirth.Year < 21 && x.IsHungarian == true);
-    if(selectedSoccerPlayers.Count() == 0)
+    if(!selectedSoccerPlayers.Any())
     {
         Console.WriteLine("Nincs ilyen játékos!");
     }

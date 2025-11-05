@@ -30,7 +30,7 @@ foreach (var player in volleyballPlayers)
 
 //- Keressük ki az ütő játékosokat az utok.txt állömányba
 
-var utok = fileData.Where(x => x.Contains("ütő"));
+var utok = fileData.Where(x => x.Contains("ütõ"));
 
 await File.WriteAllLinesAsync(path: "utok.txt", encoding: Encoding.UTF8, contents: utok);
 
@@ -52,7 +52,7 @@ await File.WriteAllTextAsync(path: "csapattagok.txt", encoding: Encoding.UTF8, c
 
 //- Rendezzük a játékosokat magasság szerint növekvő sorrendbe és a magaslatok.txt állományba mentsük el.
 var playersByHeight = volleyballPlayers.OrderBy(x => x.Height).ToList();
-stringBuilder = new StringBuilder();
+stringBuilder.Clear();
 foreach(var player in playersByHeight)
 {
     stringBuilder.AppendLine($"{player}");
@@ -63,7 +63,7 @@ await File.WriteAllTextAsync(path: "magaslatok.txt", encoding: Encoding.UTF8, co
 //- Mutassuk be a nemzetisegek.txt állományba, hogy mely nemzetiségek képviseltetik magukat a röplabdavilágban mint játékosok és milyen számban.
 
 var membersByNationality = volleyballPlayers.GroupBy(x => x.Nationality).ToDictionary(k => k.Key, v => v.ToList());
-stringBuilder = new StringBuilder();
+stringBuilder.Clear();
 foreach (var nationality in membersByNationality)
 {
     stringBuilder.AppendLine($"{nationality.Key}: {nationality.Value.Count}");
@@ -75,7 +75,7 @@ await File.WriteAllTextAsync(path: "nemzetisegek.txt", encoding: Encoding.UTF8, 
 
 double avgHeight = volleyballPlayers.Average(x => x.Height);
 var playersWithAboveAvgHeight = volleyballPlayers.Where(x => x.Height > avgHeight).ToList();
-stringBuilder = new StringBuilder();
+stringBuilder.Clear();
 foreach (var player in playersWithAboveAvgHeight)
 {
     stringBuilder.AppendLine($"{player.ToString()}");
@@ -86,12 +86,21 @@ await File.WriteAllTextAsync(path: "atlagnalmagasabbak.txt", encoding: Encoding.
 
 //- Állítsa növekvő sorrendbe a posztok szerint a játékosok ösz magasságát
 
-var sortedMembers = volleyballPlayers.OrderBy(x => x.Height).GroupBy(x => x.Nationality);
+//var sortedMembers = volleyballPlayers.OrderBy(x => x.Height).GroupBy(x => x.Nationality);
+
+var playersByPost = volleyballPlayers.GroupBy(x => x.Post).ToDictionary(k => k.Key, v => v.ToList());
+var teamHeight = new Dictionary<string, int>();
+foreach (var team in playersByPost)
+{
+    teamHeight.Add(team.Key, team.Value.Sum(x => x.Height));
+}
+
+teamHeight.OrderBy(x => x.Value);
 
 
 //- Egy szöveges állományba, „alacsonyak.txt” keresse ki a játékosok átlagmagasságától alacsonyabb játékosokat. Az állomány tartalmazza a játékosok nevét,  magasságát és hogy mennyivel alacsonyabbak az átlagnál, 2 tizedes pontossággal.
 var playersWithBelowAvgHeight = volleyballPlayers.Where(x => x.Height < avgHeight).ToList();
-stringBuilder = new StringBuilder();
+stringBuilder.Clear();
 foreach(var player in playersWithBelowAvgHeight)
 {
     stringBuilder.AppendLine($"{player.Name} - {player.Height} - különbség: {Math.Round(avgHeight - player.Height, 2)}");
