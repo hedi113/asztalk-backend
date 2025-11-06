@@ -18,6 +18,10 @@ public partial class InvoiceItemModel : ObservableObject
     [JsonPropertyName("quantity")]
     private int quantity;
 
+    [ObservableProperty]
+    [JsonPropertyName("invoiceId")]
+    private int invoiceId;
+
     public InvoiceItemModel() { }
 
     public InvoiceItemModel(InvoiceItemEntity entity) 
@@ -30,16 +34,19 @@ public partial class InvoiceItemModel : ObservableObject
         this.id = entity.Id;
         this.name = entity.Name;
         this.unitPrice = entity.UnitPrice;
+        this.quantity = entity.Quantity;
+        this.invoiceId = entity.InvoiceId;
     }
 
-    public InvoiceItemEntity ToEntity()
+    public InvoiceItemEntity ToEntity(int invoiceId)
     {
         return new InvoiceItemEntity
         {
             Id = Id,
             Name = Name,
             UnitPrice = UnitPrice,
-            Quantity = Quantity
+            Quantity = Quantity,
+            InvoiceId = invoiceId
         };
     }
 
@@ -49,6 +56,7 @@ public partial class InvoiceItemModel : ObservableObject
             this.Id == model.Id &&
             this.Name == model.Name &&
             this.UnitPrice == model.UnitPrice &&
-            this.Quantity == model.Quantity;
+            this.Quantity == model.Quantity &&
+            this.InvoiceId == model.InvoiceId;
     }
 }

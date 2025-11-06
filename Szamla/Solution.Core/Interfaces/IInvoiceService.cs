@@ -1,6 +1,6 @@
 ﻿namespace Solution.Core.Interfaces;
 
-public interface IInvoiceService
+public interface IInvoiceService 
 {
     Task<ErrorOr<InvoiceModel>> CreateAsync(InvoiceModel model);
     Task<ErrorOr<Success>> UpdateAsync(InvoiceModel model);

@@ -1,4 +1,4 @@
-﻿namespace Solution.DataBase;
+﻿namespace Solution.Services;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {

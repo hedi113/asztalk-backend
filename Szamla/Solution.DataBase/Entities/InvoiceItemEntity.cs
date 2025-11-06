@@ -17,5 +17,6 @@ public class InvoiceItemEntity
     [Required]
     public int Quantity { get; set; }
 
-    public virtual ICollection<InvoiceEntity> Invoices { get; set; }
+    public int InvoiceId { get; set; }
+    public virtual InvoiceEntity Invoice { get; set; }
 }

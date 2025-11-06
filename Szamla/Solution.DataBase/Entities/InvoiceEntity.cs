@@ -16,4 +16,6 @@ public class InvoiceEntity
 
     [Required]
     public int SumOfInvoiceItemValues { get; set; }
+
+    public virtual ICollection<InvoiceItemEntity> InvoiceItems { get; set; }
 }

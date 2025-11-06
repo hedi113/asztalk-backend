@@ -59,3 +59,7 @@ Szamla/Solution.DesktopApp/obj
 Szamla/Solution.PdfGenerator/obj
 Szamla/Solution.Services/obj
 Szamla/Solution.Validators/obj
+Szamla/Solution.Core/bin
+Szamla/Solution.DataBase/bin
+Szamla/Solution.PdfGenerator/bin
+Szamla/Solution.Validators/bin
