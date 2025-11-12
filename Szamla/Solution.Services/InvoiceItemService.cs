@@ -4,27 +4,22 @@ public class InvoiceItemService(AppDbContext dbContext) : IInvoiceItemService
 {
     private const int ROW_COUNT = 20;
 
-    public async Task<ErrorOr<InvoiceItemModel>> CreateAsync(InvoiceItemModel model, int invoiceId)
+    public async Task<ErrorOr<InvoiceItemModel>> CreateAsync(InvoiceItemModel model)
     {
-        bool exists = await dbContext.InvoiceItems.AnyAsync(x => x.Name == model.Name && x.UnitPrice == model.UnitPrice && x.Quantity == model.Quantity && x.InvoiceId == model.InvoiceId);
+        bool exists = await dbContext.InvoiceItems.AnyAsync(x => x.InvoiceId == model.InvoiceId);
 
         if (exists)
         {
             return Error.Conflict(description: "Invoice item already exists!");
         }
 
-        var invoiceItem = model.ToEntity(invoiceId);
+        var invoiceItem = model.ToEntity();
 
         await dbContext.InvoiceItems.AddAsync(invoiceItem);
         await dbContext.SaveChangesAsync();
 
-        return new InvoiceItemModel(invoiceItem)
-        {
-            Name = model.Name,
-            UnitPrice = model.UnitPrice,
-            Quantity = model.Quantity,
-            InvoiceId = invoiceId
-        };
+        model.Id = invoiceItem.Id;
+        return model;
     }
 
 

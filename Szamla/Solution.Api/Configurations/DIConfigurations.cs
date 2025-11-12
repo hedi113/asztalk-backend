@@ -6,6 +6,9 @@ public static class DIConfigurations
     {
         builder.Services.AddHttpContextAccessor();
 
+        builder.Services.AddTransient<IInvoiceService, InvoiceService>();
+
+        builder.Services.AddTransient<IInvoiceItemService, InvoiceItemService>();
 
         return builder;
     }

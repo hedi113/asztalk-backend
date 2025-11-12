@@ -13,7 +13,6 @@ global using Solution.Core.Models.Settings;
 global using Solution.Services;
 global using Solution.DesktopApp.Configurations;
 global using Solution.DesktopApp.ViewModels;
-global using Solution.DesktopApp.Views;
 global using Solution.Services;
 global using System.Runtime.InteropServices;
 global using System.Collections.ObjectModel;

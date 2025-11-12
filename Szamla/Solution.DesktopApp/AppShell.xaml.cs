@@ -16,6 +16,6 @@ public partial class AppShell : Shell
     private static void ConfigureShellNavigation()
     {
         Routing.RegisterRoute(MainView.Name, typeof(MainView));
-        Routing.RegisterRoute(AddAuthorView.Name, typeof(AddAuthorView));
+        //Routing.RegisterRoute(AddAuthorView.Name, typeof(AddAuthorView));
     }
 }

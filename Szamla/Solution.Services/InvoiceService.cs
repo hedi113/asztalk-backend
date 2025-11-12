@@ -13,7 +13,7 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
         ErrorOr<List<InvoiceItemModel>> invoiceItems = invoiceItemService.GetAllAsync().Result;
         int sumOfInvoiceItemValues = invoiceItems.Value.Where(x => x.InvoiceId == model.Id).Sum(x => x.UnitPrice);
 
-        bool exists = await dbContext.Invoices.AnyAsync(x => x.InvoiceNumber == model.InvoiceNumber && x.CreationDate == model.CreationDate && x.SumOfInvoiceItemValues == model.SumOfInvoiceItemValues);
+        bool exists = await dbContext.Invoices.AnyAsync(x => x.InvoiceNumber == model.InvoiceNumber);
 
         if (exists)
         {
@@ -54,6 +54,9 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
             SumOfInvoiceItemValues = sumOfInvoiceItemValues,
             InvoiceItems = model.InvoiceItems
         };
+        dbContext.Attach(result);
+        await dbContext.SaveChangesAsync();
+        return new ErrorOr<Success>() { };
     }
 
     public async Task<ErrorOr<Success>> DeleteAsync(int invoiceId)

@@ -117,25 +117,13 @@
 	  <Compile Update="Components\ComponentExample.xaml.cs">
 	    <DependentUpon>ComponentExample.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\AddExample.xaml.cs">
-	    <DependentUpon>AddExample.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\MainView.xaml.cs">
 	    <DependentUpon>MainView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\ListViewExample.xaml.cs">
-	    <DependentUpon>ListViewExample.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Components\ComponentExample.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\AddExample.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\ListViewExample.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

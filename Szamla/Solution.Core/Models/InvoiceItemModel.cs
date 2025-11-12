@@ -12,11 +12,11 @@ public partial class InvoiceItemModel : ObservableObject
 
     [ObservableProperty]
     [JsonPropertyName("unitPrice")]
-    private int unitPrice;
+    private int? unitPrice;
 
     [ObservableProperty]
     [JsonPropertyName("quantity")]
-    private int quantity;
+    private int? quantity;
 
     [ObservableProperty]
     [JsonPropertyName("invoiceId")]
@@ -38,7 +38,7 @@ public partial class InvoiceItemModel : ObservableObject
         this.invoiceId = entity.InvoiceId;
     }
 
-    public InvoiceItemEntity ToEntity(int invoiceId)
+    public InvoiceItemEntity ToEntity()
     {
         return new InvoiceItemEntity
         {
@@ -46,7 +46,7 @@ public partial class InvoiceItemModel : ObservableObject
             Name = Name,
             UnitPrice = UnitPrice,
             Quantity = Quantity,
-            InvoiceId = invoiceId
+            InvoiceId = InvoiceId
         };
     }
 

@@ -1,6 +1,7 @@
 ﻿namespace Solution.Database.Entities;
 
 [Table("Invoice")]
+[Index(nameof(InvoiceNumber), IsUnique = true)]
 public class InvoiceEntity
 {
     [Key]
