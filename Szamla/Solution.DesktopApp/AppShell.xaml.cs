@@ -1,4 +1,6 @@
-﻿namespace Solution.DesktopApp;
+﻿using Solution.DesktopApp.Views;
+
+namespace Solution.DesktopApp;
 
 public partial class AppShell : Shell
 {
@@ -17,5 +19,7 @@ public partial class AppShell : Shell
     {
         Routing.RegisterRoute(MainView.Name, typeof(MainView));
         //Routing.RegisterRoute(AddAuthorView.Name, typeof(AddAuthorView));
+        Routing.RegisterRoute(InvoiceView.Name, typeof(InvoiceView));
+
     }
 }

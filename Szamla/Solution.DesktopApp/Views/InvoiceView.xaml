@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Toolkit.NumericEntry;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:viewModels="clr-namespace:Solution.DesktopApp.ViewModels"
+             xmlns:models="clr-namespace:Solution.Core.Models;assembly=Solution.Core"
+             xmlns:behaviors="clr-namespace:Solution.DesktopApp.Behaviors"
+             xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
+             x:Class="Solution.DesktopApp.Views.InvoiceView"
+             x:DataType="viewModels:InvoiceViewModel"
+             x:Name="this">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing"  BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
+        <toolkit:EventToCommandBehavior Command="{Binding DisappearingCommand}" EventName="Disappearing"  BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
+    </ContentPage.Behaviors>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="0" Margin="10,0,0,0">
+
+            <sf:SfTextInputLayout Hint="Számlaszám"
+                ContainerType="Outlined">
+                <!--ErrorText="{
+                         Binding ValidationResult,
+                         Converter={StaticResource ValidationResultToErrorMessageConverter},
+                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty}
+                         }"
+                HasError="{
+                         Binding ValidationResult,
+                         Converter={StaticResource ValidationResultToHasErrorConverter},
+                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty} 
+                         }"-->
+                <Entry Text="{Binding InvoiceNumber}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="TextChanged"
+                                 BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
+                                 <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorNameProperty}"-->
+                                 <!--Command="{Binding ValidateCommand}"-->
+                    </Entry.Behaviors>
+                </Entry>
+            </sf:SfTextInputLayout>
+
+            <sf:SfTextInputLayout Hint="Számla kelte"
+                ContainerType="Outlined">
+                <!--ErrorText="{
+                        Binding ValidationResult,
+                        Converter={StaticResource ValidationResultToErrorMessageConverter},
+                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
+                        }"
+                HasError="{
+                        Binding ValidationResult,
+                        Converter={StaticResource ValidationResultToHasErrorConverter},
+                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
+                        }"-->
+                <DatePicker Date="{Binding CreationDate}"/>
+            </sf:SfTextInputLayout>
+
+
+
+
+            
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="2"  Margin="10,0,0,0">
+            <sf:SfTextInputLayout Hint="Megnevezés"
+            ContainerType="Outlined">
+                <!--ErrorText="{
+              Binding ValidationResult,
+              Converter={StaticResource ValidationResultToErrorMessageConverter},
+              ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty}
+              }"
+                HasError="{
+              Binding ValidationResult,
+              Converter={StaticResource ValidationResultToHasErrorConverter},
+              ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty} 
+              }"-->
+                <Entry Text="{Binding InvoiceNumber}">
+                    <Entry.Behaviors>
+                        <toolkit:EventToCommandBehavior EventName="TextChanged"
+                      BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
+                        <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorNameProperty}"-->
+                        <!--Command="{Binding ValidateCommand}"-->
+                    </Entry.Behaviors>
+                </Entry>
+            </sf:SfTextInputLayout>
+            <sf:SfTextInputLayout Hint="Egységár"
+            
+            ContainerType="Outlined">
+                <!--ErrorText="{
+            Binding ValidationResult,
+            Converter={StaticResource ValidationResultToErrorMessageConverter},
+            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
+            }"
+             HasError="{
+            Binding ValidationResult,
+            Converter={StaticResource ValidationResultToHasErrorConverter},
+            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
+            }"-->
+                <editors:SfNumericEntry
+            Value="{Binding UnitPrice}"
+            ShowClearButton="True"
+            CustomFormat="N0">
+                    <editors:SfNumericEntry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                    EventName="ValueChanged"
+                    BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                    Command="{Binding ValidateCommand}"/>
+                        <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}"-->
+                    </editors:SfNumericEntry.Behaviors>
+                </editors:SfNumericEntry>
+            </sf:SfTextInputLayout>
+            <sf:SfTextInputLayout Hint="Mennyiség"
+            ContainerType="Outlined">
+                <!--ErrorText="{
+            Binding ValidationResult,
+            Converter={StaticResource ValidationResultToErrorMessageConverter},
+            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
+            }"
+            HasError="{
+            Binding ValidationResult,
+            Converter={StaticResource ValidationResultToHasErrorConverter},
+            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
+            }"-->
+                <editors:SfNumericEntry
+            Value="{Binding UnitPrice}"
+            ShowClearButton="True"
+            CustomFormat="N0">
+                    <editors:SfNumericEntry.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                    EventName="ValueChanged"
+                    BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                    Command="{Binding ValidateCommand}"/>
+                        <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}"-->
+                    </editors:SfNumericEntry.Behaviors>
+                </editors:SfNumericEntry>
+            </sf:SfTextInputLayout>
+            <VerticalStackLayout Style="{StaticResource FormLineContainer}">
+                <Button Text="Submit" Command="{Binding SubmitCommand}" WidthRequest="250"/>
+            </VerticalStackLayout>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="0" Margin="30,10,30,0">
+            
+            <ScrollView Grid.Row="1">
+                <Border Stroke="Black"
+                    StrokeThickness="1"
+                    StrokeShape="Rectangle"
+                    Padding="8"
+                    HorizontalOptions="Center">
+                    <CollectionView ItemsSource="{Binding InvoiceItems}" Margin="50,0,50,0" >
+                        <CollectionView.Header>
+                            <Grid BackgroundColor="{AppThemeBinding Light=white, Dark=WhiteSmoke}"
+                   Padding="10,0,10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Text="Számla tételei" Grid.Column="2" Grid.Row="0" Padding="0,0,0,30"/>
+                                <Label Grid.Column="0"
+                                       Grid.Row="1"
+                                Text="Megnevezés"
+                                HorizontalTextAlignment="Center"
+                                Style="{x:StaticResource TableHeader}" />
+                                <Label Grid.Column="1"
+                                       Grid.Row="1"
+                                Text="Egységár"
+                                HorizontalTextAlignment="Center"
+                                Style="{x:StaticResource TableHeader}" />
+                                <Label Grid.Column="2"
+                                       Grid.Row="1"
+                                Text="Mennyiség"
+                                HorizontalTextAlignment="Center"
+                                Style="{x:StaticResource TableHeader}" />
+                                <Label Grid.Column="3"
+                                       Grid.Row="1"
+                                Text="Összesen"
+                                HorizontalTextAlignment="Center"
+                                Style="{x:StaticResource TableHeader}" />
+                            </Grid>
+                        </CollectionView.Header>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+                        <!--<CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AuthorModel">
+                            <components:AuthorListComponent Author="{Binding .}"
+                                                     DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthorListViewModel}}, Path=DeleteCommand}"
+                                                     CommandParameter="{Binding Id}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>-->
+
+                    </CollectionView>
+                </Border>
+            </ScrollView>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

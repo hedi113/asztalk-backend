@@ -63,3 +63,6 @@ Szamla/Solution.Core/bin
 Szamla/Solution.DataBase/bin
 Szamla/Solution.PdfGenerator/bin
 Szamla/Solution.Validators/bin
+Szamla/Solution.Api/bin
+Szamla/Solution.DesktopApp/bin
+Szamla/Solution.Services/bin

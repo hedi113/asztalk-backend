@@ -8,7 +8,7 @@
     xmlns:views="clr-namespace:Solution.DesktopApp.Views"
     x:DataType="viewModels:AppShellViewModel"
     Shell.FlyoutBehavior="Disabled"
-    Title="Motorcycle Database">
+    Title="Számlák">
 
     <Shell.Resources>
         <Style x:Key="ShellContentStyle" TargetType="Element">
@@ -21,6 +21,9 @@
     <Shell.MenuBarItems>
         <MenuBarItem Text="File">
           <MenuFlyoutItem Text="Exit" Command="{Binding ExitCommand}" />
+        </MenuBarItem>
+        <MenuBarItem Text="Számlák">
+            <MenuFlyoutItem Text="Számla kezelése" Command="{Binding ToInvoiceCommand}" />
         </MenuBarItem>
 
         <!--Example-->

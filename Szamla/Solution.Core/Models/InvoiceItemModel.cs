@@ -18,6 +18,15 @@ public partial class InvoiceItemModel : ObservableObject
     [JsonPropertyName("quantity")]
     private int? quantity;
 
+
+    public int? Sum
+    {
+        get
+        {
+            return UnitPrice * Quantity;
+        }
+    }
+
     [ObservableProperty]
     [JsonPropertyName("invoiceId")]
     private int invoiceId;

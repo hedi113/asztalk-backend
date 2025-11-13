@@ -114,18 +114,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Components\ComponentExample.xaml.cs">
-	    <DependentUpon>ComponentExample.xaml</DependentUpon>
+	  <Compile Update="Components\InvoiceItemListComponent.xaml.cs">
+	    <DependentUpon>InvoiceItemListComponent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\InvoiceView.xaml.cs">
+	    <DependentUpon>InvoiceView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\MainView.xaml.cs">
 	    <DependentUpon>MainView.xaml</DependentUpon>
 	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Components\ComponentExample.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>

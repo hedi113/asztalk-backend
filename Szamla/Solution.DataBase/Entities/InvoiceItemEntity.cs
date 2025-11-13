@@ -12,10 +12,10 @@ public class InvoiceItemEntity
     public string Name { get; set; }
 
     [Required]
-    public int UnitPrice { get; set; }
+    public int? UnitPrice { get; set; }
 
     [Required]
-    public int Quantity { get; set; }
+    public int? Quantity { get; set; }
 
     public int InvoiceId { get; set; }
     public virtual InvoiceEntity Invoice { get; set; }

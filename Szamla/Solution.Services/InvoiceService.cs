@@ -11,7 +11,7 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
     public async Task<ErrorOr<InvoiceModel>> CreateAsync(InvoiceModel model)
     {
         ErrorOr<List<InvoiceItemModel>> invoiceItems = invoiceItemService.GetAllAsync().Result;
-        int sumOfInvoiceItemValues = invoiceItems.Value.Where(x => x.InvoiceId == model.Id).Sum(x => x.UnitPrice);
+        int sumOfInvoiceItemValues = (int)invoiceItems.Value.Where(x => x.InvoiceId == model.Id).Sum(x => x.UnitPrice);
 
         bool exists = await dbContext.Invoices.AnyAsync(x => x.InvoiceNumber == model.InvoiceNumber);
 
@@ -25,7 +25,7 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
                 InvoiceNumber = model.InvoiceNumber,
                 CreationDate = model.CreationDate,
                 SumOfInvoiceItemValues = sumOfInvoiceItemValues,
-                InvoiceItems = model.InvoiceItems
+                InvoiceItems = [.. model.InvoiceItems.Select(x => x.ToEntity())]
             };
 
             await dbContext.Invoices.AddAsync(invoice);
@@ -45,15 +45,16 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
     public async Task<ErrorOr<Success>> UpdateAsync(InvoiceModel model)
     {
         ErrorOr<List<InvoiceItemModel>> invoiceItems = await invoiceItemService.GetAllAsync();
-        int sumOfInvoiceItemValues = invoiceItems.Value.Where(x => x.InvoiceId == model.Id).Sum(x => x.UnitPrice);
+        int sumOfInvoiceItemValues = (int)invoiceItems.Value.Where(x => x.InvoiceId == model.Id).Sum(x => x.UnitPrice);
 
         var result = new InvoiceEntity()
         {
             InvoiceNumber = model.InvoiceNumber,
             CreationDate = model.CreationDate,
             SumOfInvoiceItemValues = sumOfInvoiceItemValues,
-            InvoiceItems = model.InvoiceItems
+            InvoiceItems = [.. model.InvoiceItems.Select(x => x.ToEntity())]
         };
+
         dbContext.Attach(result);
         await dbContext.SaveChangesAsync();
         return new ErrorOr<Success>() { };
