@@ -7,10 +7,6 @@
              BackgroundColor="Black">
 
     <Grid VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Books"
-               TextColor="WhiteSmoke" FontSize="Title" FontAttributes="Bold" 
-               HorizontalTextAlignment="Center" 
-               Margin="0,20,0,20"/>
     </Grid>
 
 </ContentPage>

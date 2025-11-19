@@ -18,6 +18,8 @@ public static class ConfigureDI
         builder.Services.AddScoped<IGoogleDriveService, GoogleDriveService> ();
         
 		builder.Services.AddScoped<IInvoiceService, InvoiceService> ();
+        
+		builder.Services.AddScoped<IInvoiceItemService, InvoiceItemService>();
 
         return builder;
 	}

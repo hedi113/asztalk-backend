@@ -10,18 +10,10 @@ public partial class AppShellViewModel
 
     public IAsyncRelayCommand ToInvoiceCommand => new AsyncRelayCommand(OnToInvoiceCommandAsync);
 
-    //Example
-    //public IAsyncRelayCommand AddNewBookCommand => new AsyncRelayCommand(OnAddNewBookAsync);
-
 
     private async Task OnExitAsync() => Application.Current.Quit();
 
-    //Example
-    //private async Task OnAddNewBookAsync()
-    //{
-    //    Shell.Current.ClearNavigationStack();
-    //    await Shell.Current.GoToAsync(AddBookView.Name);
-    //}
+   
 
     private async Task OnToInvoiceCommandAsync()
     {

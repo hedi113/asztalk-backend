@@ -5,6 +5,7 @@
              xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
              xmlns:editors="clr-namespace:Syncfusion.Maui.Toolkit.NumericEntry;assembly=Syncfusion.Maui.Toolkit"
              xmlns:viewModels="clr-namespace:Solution.DesktopApp.ViewModels"
+             xmlns:components="clr-namespace:Solution.DesktopApp.Components"
              xmlns:models="clr-namespace:Solution.Core.Models;assembly=Solution.Core"
              xmlns:behaviors="clr-namespace:Solution.DesktopApp.Behaviors"
              xmlns:validator="clr-namespace:Solution.Validators;assembly=Solution.Validators"
@@ -31,122 +32,119 @@
         <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="0" Margin="10,0,0,0">
 
             <sf:SfTextInputLayout Hint="Számlaszám"
-                ContainerType="Outlined">
-                <!--ErrorText="{
+                ContainerType="Outlined"
+                ErrorText="{
                          Binding ValidationResult,
                          Converter={StaticResource ValidationResultToErrorMessageConverter},
-                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty}
+                         ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceNumberProperty}
                          }"
                 HasError="{
                          Binding ValidationResult,
                          Converter={StaticResource ValidationResultToHasErrorConverter},
-                         ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty} 
-                         }"-->
+                         ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceNumberProperty} 
+                         }">
                 <Entry Text="{Binding InvoiceNumber}">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="TextChanged"
-                                 BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
-                                 <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorNameProperty}"-->
-                                 <!--Command="{Binding ValidateCommand}"-->
+                                 BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                                 CommandParameter="{x:Static validator:InvoiceModelValidator.InvoiceNumberProperty}"
+                                 Command="{Binding ValidateInvoiceCommand}"/>
                     </Entry.Behaviors>
                 </Entry>
             </sf:SfTextInputLayout>
 
             <sf:SfTextInputLayout Hint="Számla kelte"
-                ContainerType="Outlined">
-                <!--ErrorText="{
+                ContainerType="Outlined"
+                ErrorText="{
                         Binding ValidationResult,
                         Converter={StaticResource ValidationResultToErrorMessageConverter},
-                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
+                        ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceCreationDateProperty}
                         }"
                 HasError="{
                         Binding ValidationResult,
                         Converter={StaticResource ValidationResultToHasErrorConverter},
-                        ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
-                        }"-->
+                        ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceCreationDateProperty} 
+                        }">
                 <DatePicker Date="{Binding CreationDate}"/>
             </sf:SfTextInputLayout>
-
-
-
-
-            
         </StackLayout>
+        
+        
+        
         <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="2"  Margin="10,0,0,0">
             <sf:SfTextInputLayout Hint="Megnevezés"
-            ContainerType="Outlined">
-                <!--ErrorText="{
+            ContainerType="Outlined"
+                ErrorText="{
               Binding ValidationResult,
               Converter={StaticResource ValidationResultToErrorMessageConverter},
-              ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty}
+              ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemNameProperty}
               }"
                 HasError="{
               Binding ValidationResult,
               Converter={StaticResource ValidationResultToHasErrorConverter},
-              ConverterParameter={x:Static validator:AuthorModelValidator.AuthorNameProperty} 
-              }"-->
-                <Entry Text="{Binding InvoiceNumber}">
+              ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemNameProperty} 
+              }">
+                <Entry Text="{Binding InvoiceItem.Name}">
                     <Entry.Behaviors>
                         <toolkit:EventToCommandBehavior EventName="TextChanged"
-                      BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"/>
-                        <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorNameProperty}"-->
-                        <!--Command="{Binding ValidateCommand}"-->
+                      BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
+                        CommandParameter="{x:Static validator:InvoiceItemModelValidator.InvoiceItemNameProperty}"
+                        Command="{Binding ValidateInvoiceItemCommand}"/>
                     </Entry.Behaviors>
                 </Entry>
             </sf:SfTextInputLayout>
             <sf:SfTextInputLayout Hint="Egységár"
-            
-            ContainerType="Outlined">
-                <!--ErrorText="{
+            ContainerType="Outlined"
+                ErrorText="{
             Binding ValidationResult,
             Converter={StaticResource ValidationResultToErrorMessageConverter},
-            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
+            ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemUnitPriceProperty}
             }"
              HasError="{
             Binding ValidationResult,
             Converter={StaticResource ValidationResultToHasErrorConverter},
-            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
-            }"-->
+            ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemUnitPriceProperty} 
+            }">
                 <editors:SfNumericEntry
-            Value="{Binding UnitPrice}"
+            Value="{Binding InvoiceItem.UnitPrice}"
             ShowClearButton="True"
             CustomFormat="N0">
                     <editors:SfNumericEntry.Behaviors>
                         <toolkit:EventToCommandBehavior
                     EventName="ValueChanged"
                     BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
-                    Command="{Binding ValidateCommand}"/>
-                        <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}"-->
+                    Command="{Binding ValidateInvoiceItemCommand}"
+                        CommandParameter="{x:Static validator:InvoiceItemModelValidator.InvoiceItemUnitPriceProperty}"/>
                     </editors:SfNumericEntry.Behaviors>
                 </editors:SfNumericEntry>
             </sf:SfTextInputLayout>
             <sf:SfTextInputLayout Hint="Mennyiség"
-            ContainerType="Outlined">
-                <!--ErrorText="{
+            ContainerType="Outlined"
+                ErrorText="{
             Binding ValidationResult,
             Converter={StaticResource ValidationResultToErrorMessageConverter},
-            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}
+            ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemQuantityProperty}
             }"
             HasError="{
             Binding ValidationResult,
             Converter={StaticResource ValidationResultToHasErrorConverter},
-            ConverterParameter={x:Static validator:AuthorModelValidator.AuthorBirthYearProperty} 
-            }"-->
+            ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemQuantityProperty} 
+            }">
                 <editors:SfNumericEntry
-            Value="{Binding UnitPrice}"
+            Value="{Binding InvoiceItem.Quantity}"
             ShowClearButton="True"
             CustomFormat="N0">
                     <editors:SfNumericEntry.Behaviors>
                         <toolkit:EventToCommandBehavior
                     EventName="ValueChanged"
                     BindingContext="{Binding Source={x:Reference this}, Path=BindingContext}"
-                    Command="{Binding ValidateCommand}"/>
-                        <!--CommandParameter="{x:Static validator:AuthorModelValidator.AuthorBirthYearProperty}"-->
+                    Command="{Binding ValidateInvoiceItemCommand}"
+                        CommandParameter="{x:Static validator:InvoiceItemModelValidator.InvoiceItemQuantityProperty}" />
                     </editors:SfNumericEntry.Behaviors>
                 </editors:SfNumericEntry>
             </sf:SfTextInputLayout>
             <VerticalStackLayout Style="{StaticResource FormLineContainer}">
-                <Button Text="Submit" Command="{Binding SubmitCommand}" WidthRequest="250"/>
+                <Button Text="Submit" Command="{Binding OnAddOrUpdateCommand}" WidthRequest="250"/>
             </VerticalStackLayout>
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="0" Margin="30,10,30,0">
@@ -200,13 +198,13 @@
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
                         </CollectionView.ItemsLayout>
-                        <!--<CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:AuthorModel">
-                            <components:AuthorListComponent Author="{Binding .}"
-                                                     DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthorListViewModel}}, Path=DeleteCommand}"
+                        <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:InvoiceItemModel">
+                            <components:InvoiceItemListComponent InvoiceItem="{Binding .}"
+                                                     DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InvoiceViewModel}}, Path=DeleteCommand}"
                                                      CommandParameter="{Binding Id}"/>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate>-->
+                    </CollectionView.ItemTemplate>
 
                     </CollectionView>
                 </Border>

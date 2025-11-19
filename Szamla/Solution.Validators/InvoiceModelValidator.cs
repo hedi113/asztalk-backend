@@ -4,7 +4,9 @@ public class InvoiceModelValidator : BaseValidators<InvoiceModel>
 {
     public static string InvoiceNumberProperty => nameof(InvoiceModel.InvoiceNumber);
     public static string InvoiceCreationDateProperty => nameof(InvoiceModel.CreationDate);
-    public static string SumOfInvoiceItemValues => nameof(InvoiceModel.SumOfInvoiceItemValues);
+    public static string SumOfInvoiceItemValuesProperty => nameof(InvoiceModel.SumOfInvoiceItemValues);
+    public static string InvoiceItemsProperty => nameof(InvoiceModel.InvoiceItems);
+    public static string GlobalProperty => "Global";
 
     public InvoiceModelValidator(IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor)
     {
@@ -23,6 +25,9 @@ public class InvoiceModelValidator : BaseValidators<InvoiceModel>
         RuleFor(x => x.SumOfInvoiceItemValues)
             .GreaterThan(0)
                 .WithMessage("The sum of the values must be greater than 0!");
+        RuleFor(x => x.InvoiceItems)
+            .NotEmpty()
+                .WithMessage("Add at least 1 invoice item to the invoice!");
     }
 
 }

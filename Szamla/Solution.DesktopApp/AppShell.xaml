@@ -26,23 +26,9 @@
             <MenuFlyoutItem Text="Számla kezelése" Command="{Binding ToInvoiceCommand}" />
         </MenuBarItem>
 
-        <!--Example-->
-        <!--<MenuBarItem Text="Books">
-            <MenuFlyoutItem Text="Add new book" Command="{Binding AddNewBookCommand}">
-                <MenuFlyoutItem.IconImageSource>
-                    <FontImageSource Glyph="&#x25B6;" FontFamily="Arial" Color="Black"/>
-                </MenuFlyoutItem.IconImageSource>
-            </MenuFlyoutItem>
-            <MenuFlyoutItem Text="List books" Command="{Binding ListAllBooksCommand}">
-                <MenuFlyoutItem.IconImageSource>
-                    <FontImageSource Glyph="&#x25B6;" FontFamily="Arial" Color="Black"/>
-                </MenuFlyoutItem.IconImageSource>
-            </MenuFlyoutItem>
-        </MenuBarItem>-->
 
 
-        
-        
+
     </Shell.MenuBarItems>
 
     <ShellContent ContentTemplate="{DataTemplate local:MainView}"
