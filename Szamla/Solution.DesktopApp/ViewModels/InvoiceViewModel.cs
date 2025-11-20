@@ -15,7 +15,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     #endregion
 
     #region event commands
-    public IAsyncRelayCommand OnAddOrUpdateCommand => new AsyncRelayCommand(OnAddOrUpdateAsync);
+    public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnAddInvoiceItemAsync);
+    public IAsyncRelayCommand OnAddInvoiceCommand => new AsyncRelayCommand(OnAddInvoiceAsync);
     #endregion
 
     private InvoiceModelValidator invoiceValidator => new InvoiceModelValidator(null);
@@ -26,50 +27,25 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     private ValidationResult validationResult = new ValidationResult();
 
     private delegate Task ButtonActionDelagate();
-    private ButtonActionDelagate asyncButtonAction;
+    private ButtonActionDelagate asyncButtonActionAddInvoiceItem;
+    private ButtonActionDelagate asyncButtonActionAddInvoice;
+    private ButtonActionDelagate asyncButtonActionUpdateInvoiceItem;
 
 
     [ObservableProperty]
-    private InvoiceItemModel invoiceItem;
+    private InvoiceItemModel invoiceItem = new InvoiceItemModel();
 
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        bool invoiceItemHasValue = query.TryGetValue("InvoiceItem", out object result);
+        bool invoiceHasValue = query.TryGetValue("InvoiceItem", out object result);
 
-        if (!invoiceItemHasValue)
-        {
-            asyncButtonAction = OnSaveInvoiceItemAsync;
-            return;
-        }
+        asyncButtonActionAddInvoiceItem = OnSaveInvoiceItemAsync;
+        asyncButtonActionAddInvoice = OnSaveInvoiceAsync;
 
-        if (asyncButtonAction == null)
-        {
-            InvoiceItemModel invoiceItem = result as InvoiceItemModel;
 
-            InvoiceItem.UnitPrice = invoiceItem.UnitPrice;
-            InvoiceItem.Quantity = invoiceItem.Quantity;
-            InvoiceItem.Name = invoiceItem.Name; 
 
-            asyncButtonAction = OnUpdateInvoiceItemAsync;
-        }
-        bool invoiceHasValue = query.TryGetValue("Invoice", out object res);
-
-        if (!invoiceHasValue)
-        {
-            asyncButtonAction = OnSaveInvoiceAsync; 
-            return;
-        }
-
-        InvoiceModel invoice = result as InvoiceModel;
-
-        this.CreationDate = invoice.CreationDate;
-        this.InvoiceItems = invoice.InvoiceItems;
-        this.SumOfInvoiceItemValues = invoice.SumOfInvoiceItemValues;
-        this.InvoiceNumber = invoice.InvoiceNumber;
-
-        asyncButtonAction = OnUpdateInvoiceAsync;
-
+            asyncButtonActionUpdateInvoiceItem = OnUpdateInvoiceItemAsync;
     }
 
     private async Task OnAppearingkAsync()
@@ -79,7 +55,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     private async Task OnDisappearingAsync()
     { }
 
-    private async Task OnAddOrUpdateAsync() => await asyncButtonAction();
+    private async Task OnAddInvoiceItemAsync() => await asyncButtonActionAddInvoiceItem();
+    private async Task OnAddInvoiceAsync() => await asyncButtonActionAddInvoice();
 
     private async Task OnSaveInvoiceItemAsync()
     {

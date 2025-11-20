@@ -1,4 +1,6 @@
-﻿namespace Solution.Services;
+﻿using Solution.Database.Entities;
+
+namespace Solution.Services;
 
 public class InvoiceItemService(AppDbContext dbContext) : IInvoiceItemService
 {
