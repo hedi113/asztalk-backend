@@ -22,9 +22,6 @@ public class InvoiceModelValidator : BaseValidators<InvoiceModel>
                 .WithMessage("A date must be given!")
             .LessThanOrEqualTo(DateTime.Now)
                 .WithMessage("The creation date can't be in the future!");
-        RuleFor(x => x.SumOfInvoiceItemValues)
-            .GreaterThan(0)
-                .WithMessage("The sum of the values must be greater than 0!");
         RuleFor(x => x.InvoiceItems)
             .NotEmpty()
                 .WithMessage("Add at least 1 invoice item to the invoice!");

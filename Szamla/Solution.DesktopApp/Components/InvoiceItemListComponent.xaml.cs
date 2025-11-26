@@ -26,6 +26,14 @@ public partial class InvoiceItemListComponent : ContentView
          defaultBindingMode: BindingMode.OneWay
     );
 
+    public static readonly BindableProperty EditCommandProperty = BindableProperty.Create(
+         propertyName: nameof(EditCommand),
+         returnType: typeof(IAsyncRelayCommand),
+         declaringType: typeof(InvoiceItemListComponent),
+         defaultValue: null,
+         defaultBindingMode: BindingMode.OneWay
+    );
+
     public IAsyncRelayCommand DeleteCommand
     {
         get => (IAsyncRelayCommand)GetValue(DeleteCommandProperty);
@@ -40,25 +48,20 @@ public partial class InvoiceItemListComponent : ContentView
          defaultBindingMode: BindingMode.TwoWay
         );
 
+    public IAsyncRelayCommand EditCommand
+    {
+        get => (IAsyncRelayCommand)GetValue(EditCommandProperty);
+        set => SetValue(EditCommandProperty, value);
+    }
+
     public string CommandParameter
     {
         get => (string)GetValue(CommandParameterProperty);
         set => SetValue(CommandParameterProperty, value);
     }
 
-    public IAsyncRelayCommand EditCommand => new AsyncRelayCommand(OnEditAsync);
-
     public InvoiceItemListComponent()
 	{
 		InitializeComponent();
 	}
-
-    private async Task OnEditAsync()
-    {
-        ShellNavigationQueryParameters navigationQueryParameter = new ShellNavigationQueryParameters
-        {
-            { "InvoiceItem", this.InvoiceItem}
-        };
-
-    }
 }

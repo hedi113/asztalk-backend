@@ -1,4 +1,6 @@
-﻿namespace Solution.Core.Models;
+﻿using System.Collections.ObjectModel;
+
+namespace Solution.Core.Models;
 
 public partial class InvoiceModel : ObservableObject
 {
@@ -20,7 +22,7 @@ public partial class InvoiceModel : ObservableObject
 
     [ObservableProperty]
     [JsonPropertyName("")]
-    private ICollection<InvoiceItemModel> invoiceItems;
+    private ObservableCollection<InvoiceItemModel> invoiceItems;
 
     public InvoiceModel() { }
 
@@ -31,11 +33,13 @@ public partial class InvoiceModel : ObservableObject
             return;
         }
 
+        var invoiceItems = entity.InvoiceItems.Select(x => new InvoiceItemModel(x)).ToList();
+
         this.id = entity.Id;
         this.invoiceNumber = entity.InvoiceNumber;
         this.creationDate = entity.CreationDate;
         this.sumOfInvoiceItemValues = entity.SumOfInvoiceItemValues;
-        this.invoiceItems = entity.InvoiceItems.Select(x => new InvoiceItemModel(x)).ToList();
+        this.invoiceItems = new ObservableCollection<InvoiceItemModel>(invoiceItems);
     }
 
     public InvoiceEntity ToEntity()

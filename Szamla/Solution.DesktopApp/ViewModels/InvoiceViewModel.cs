@@ -17,6 +17,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     #region event commands
     public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnAddInvoiceItemAsync);
     public IAsyncRelayCommand OnAddInvoiceCommand => new AsyncRelayCommand(OnAddInvoiceAsync);
+    public IAsyncRelayCommand OnUpdateInvoiceItemCommand => new AsyncRelayCommand(UpdateInvoiceItemAsync);
+    public IAsyncRelayCommand OnDeleteInvoiceItemCommand => new AsyncRelayCommand(DeleteInvoiceItemAsync);
     #endregion
 
     private InvoiceModelValidator invoiceValidator => new InvoiceModelValidator(null);
@@ -30,6 +32,7 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     private ButtonActionDelagate asyncButtonActionAddInvoiceItem;
     private ButtonActionDelagate asyncButtonActionAddInvoice;
     private ButtonActionDelagate asyncButtonActionUpdateInvoiceItem;
+    private ButtonActionDelagate asyncButtonActionDeleteInvoiceItem;
 
 
     [ObservableProperty]
@@ -42,10 +45,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
         asyncButtonActionAddInvoiceItem = OnSaveInvoiceItemAsync;
         asyncButtonActionAddInvoice = OnSaveInvoiceAsync;
-
-
-
-            asyncButtonActionUpdateInvoiceItem = OnUpdateInvoiceItemAsync;
+        asyncButtonActionUpdateInvoiceItem = OnUpdateInvoiceItemAsync;
+        asyncButtonActionDeleteInvoiceItem = OnDeleteInvoiceItemAsync;
     }
 
     private async Task OnAppearingkAsync()
@@ -57,26 +58,39 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
     private async Task OnAddInvoiceItemAsync() => await asyncButtonActionAddInvoiceItem();
     private async Task OnAddInvoiceAsync() => await asyncButtonActionAddInvoice();
+    private async Task OnUpdateInvoiceItemAsync() => await asyncButtonActionUpdateInvoiceItem();
+    private async Task OnDeleteInvoiceItemAsync() => await asyncButtonActionDeleteInvoiceItem();
 
     private async Task OnSaveInvoiceItemAsync()
     {
         this.ValidationResult = await invoiceItemValidator.ValidateAsync(InvoiceItem);
 
-        if(!ValidationResult.IsValid)
+        if (!ValidationResult.IsValid)
         {
             return;
         }
 
-        var result = await invoiceItemService.CreateAsync(InvoiceItem);
-        var message = result.IsError ? result.FirstError.Description : "Invoice item saved";
-        var title = result.IsError ? "Error" : "Information";
-        
-        if(!result.IsError)
-        {
-            ClearInvoiceItemForm();
-        } 
+        //var result = await invoiceItemService.CreateAsync(InvoiceItem);
+        //var message = result.IsError ? result.FirstError.Description : "Invoice item saved";
+        //var title = result.IsError ? "Error" : "Information";
 
-        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+        //if(!result.IsError)
+        //{
+        //    ClearInvoiceItemForm();
+        //} 
+
+        //await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+        InvoiceItems ??= new ObservableCollection<InvoiceItemModel>();
+        InvoiceItems.Add(new InvoiceItemModel
+        { 
+            Name = InvoiceItem.Name,
+            Quantity = InvoiceItem.Quantity,
+            UnitPrice = InvoiceItem.UnitPrice,
+            Id = InvoiceItem.Id,
+            InvoiceId = this.Id
+        });
+
+        ClearInvoiceItemForm();
     }
 
     private async Task OnSaveInvoiceAsync()
@@ -98,10 +112,18 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
         }
 
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+
+        ClearInvoiceForm();
+    }
+
+    private async Task DeleteInvoiceItemAsync()
+    {
+        this.InvoiceItems.Remove(InvoiceItem);
     }
 
     private async Task OnUpdateInvoiceAsync()
     {
+
         this.ValidationResult = await invoiceValidator.ValidateAsync(this);
 
         if (!ValidationResult.IsValid)
@@ -116,9 +138,15 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
     }
 
-    private async Task OnUpdateInvoiceItemAsync()
+    private async Task UpdateInvoiceItemAsync()
     {
-
+        InvoiceItemModel model = new()
+        {
+            Id = InvoiceItem.Id,
+            Name = InvoiceItem.Name,
+            UnitPrice = InvoiceItem.UnitPrice,
+            Quantity = InvoiceItem.Quantity
+        };
 
         this.ValidationResult = await invoiceItemValidator.ValidateAsync(InvoiceItem);
 
@@ -127,11 +155,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
             return;
         }
 
-        var result = await invoiceItemService.UpdateAsync(InvoiceItem);
-        var message = result.IsError ? result.FirstError.Description : "Invoice item updated";
-        var title = result.IsError ? "Error" : "Information";
-
-        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+        InvoiceItem = model;
+        
     }
 
     private void ClearInvoiceItemForm()
@@ -144,6 +169,7 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     private void ClearInvoiceForm()
     {
         this.InvoiceItems.Clear();
+        this.InvoiceNumber = null;
         this.CreationDate = DateTime.Now;
         this.SumOfInvoiceItemValues = 0;
     }
