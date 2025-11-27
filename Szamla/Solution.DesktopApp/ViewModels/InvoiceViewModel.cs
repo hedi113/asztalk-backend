@@ -17,8 +17,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     #region event commands
     public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnAddInvoiceItemAsync);
     public IAsyncRelayCommand OnAddInvoiceCommand => new AsyncRelayCommand(OnAddInvoiceAsync);
-    public IAsyncRelayCommand OnUpdateInvoiceItemCommand => new AsyncRelayCommand(UpdateInvoiceItemAsync);
-    public IAsyncRelayCommand OnDeleteInvoiceItemCommand => new AsyncRelayCommand(DeleteInvoiceItemAsync);
+    public IAsyncRelayCommand UpdateCommand => new AsyncRelayCommand(OnUpdateInvoiceItemAsync);
+    public IAsyncRelayCommand DeleteCommand => new AsyncRelayCommand(OnDeleteInvoiceItemAsync);
     #endregion
 
     private InvoiceModelValidator invoiceValidator => new InvoiceModelValidator(null);
@@ -58,8 +58,6 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
     private async Task OnAddInvoiceItemAsync() => await asyncButtonActionAddInvoiceItem();
     private async Task OnAddInvoiceAsync() => await asyncButtonActionAddInvoice();
-    private async Task OnUpdateInvoiceItemAsync() => await asyncButtonActionUpdateInvoiceItem();
-    private async Task OnDeleteInvoiceItemAsync() => await asyncButtonActionDeleteInvoiceItem();
 
     private async Task OnSaveInvoiceItemAsync()
     {
@@ -116,29 +114,12 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
         ClearInvoiceForm();
     }
 
-    private async Task DeleteInvoiceItemAsync()
+    private async Task OnDeleteInvoiceItemAsync()
     {
         this.InvoiceItems.Remove(InvoiceItem);
     }
 
-    private async Task OnUpdateInvoiceAsync()
-    {
-
-        this.ValidationResult = await invoiceValidator.ValidateAsync(this);
-
-        if (!ValidationResult.IsValid)
-        {
-            return;
-        }
-
-        var result = await invoiceService.UpdateAsync(this);
-        var message = result.IsError ? result.FirstError.Description : "Invoice updated";
-        var title = result.IsError ? "Error" : "Information";
-
-        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
-    }
-
-    private async Task UpdateInvoiceItemAsync()
+    private async Task OnUpdateInvoiceItemAsync()
     {
         InvoiceItemModel model = new()
         {

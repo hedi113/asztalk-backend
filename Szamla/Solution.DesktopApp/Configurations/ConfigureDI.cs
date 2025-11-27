@@ -11,9 +11,13 @@ public static class ConfigureDI
 
 		builder.Services.AddTransient<InvoiceViewModel>();
 
+        builder.Services.AddTransient<InvoiceListViewModel>();
+
         builder.Services.AddTransient<MainView>();
         
 		builder.Services.AddTransient<InvoiceView>();
+
+        builder.Services.AddTransient<InvoiceListView>();
 
         builder.Services.AddScoped<IGoogleDriveService, GoogleDriveService> ();
         

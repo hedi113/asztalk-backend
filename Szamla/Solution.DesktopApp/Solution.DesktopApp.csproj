@@ -114,8 +114,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Components\InvoiceListComponent.xaml.cs">
+	    <DependentUpon>InvoiceListComponent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Components\InvoiceItemListComponent.xaml.cs">
 	    <DependentUpon>InvoiceItemListComponent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\InvoiceListView.xaml.cs">
+	    <DependentUpon>InvoiceListView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\InvoiceView.xaml.cs">
 	    <DependentUpon>InvoiceView.xaml</DependentUpon>
@@ -123,6 +129,15 @@
 	  <Compile Update="Views\MainView.xaml.cs">
 	    <DependentUpon>MainView.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Components\InvoiceListComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\InvoiceListView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>

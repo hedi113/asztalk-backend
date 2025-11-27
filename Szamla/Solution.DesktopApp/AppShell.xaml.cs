@@ -19,6 +19,6 @@ public partial class AppShell : Shell
     {
         Routing.RegisterRoute(MainView.Name, typeof(MainView));
         Routing.RegisterRoute(InvoiceView.Name, typeof(InvoiceView));
-
+        Routing.RegisterRoute(InvoiceListView.Name, typeof(InvoiceListView));
     }
 }

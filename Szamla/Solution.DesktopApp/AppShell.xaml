@@ -23,7 +23,8 @@
           <MenuFlyoutItem Text="Exit" Command="{Binding ExitCommand}" />
         </MenuBarItem>
         <MenuBarItem Text="Számlák">
-            <MenuFlyoutItem Text="Számla kezelése" Command="{Binding ToInvoiceCommand}" />
+            <MenuFlyoutItem Text="Új számla" Command="{Binding ToInvoiceCommand}" />
+            <MenuFlyoutItem Text="Áttekintés" Command="{Binding ToInvoiceListCommand}" />
         </MenuBarItem>
 
 

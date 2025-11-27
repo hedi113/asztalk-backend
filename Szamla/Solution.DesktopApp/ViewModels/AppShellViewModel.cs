@@ -10,6 +10,7 @@ public partial class AppShellViewModel
 
     public IAsyncRelayCommand ToInvoiceCommand => new AsyncRelayCommand(OnToInvoiceCommandAsync);
 
+    public IAsyncRelayCommand ToInvoiceListCommand => new AsyncRelayCommand(OnToInvoiceListCommandAsync);
 
     private async Task OnExitAsync() => Application.Current.Quit();
 
@@ -19,5 +20,11 @@ public partial class AppShellViewModel
     {
         Shell.Current.ClearNavigationStack();
         await Shell.Current.GoToAsync(InvoiceView.Name);
+    }
+
+    private async Task OnToInvoiceListCommandAsync()
+    {
+        Shell.Current.ClearNavigationStack();
+        await Shell.Current.GoToAsync(InvoiceListView.Name);
     }
 }
