@@ -1,4 +1,3 @@
-using Solution.DesktopApp.Views;
 
 namespace Solution.DesktopApp.Components;
 
@@ -9,7 +8,7 @@ public partial class InvoiceItemListComponent : ContentView
          returnType: typeof(InvoiceItemModel),
          declaringType: typeof(InvoiceItemListComponent),
          defaultValue: null,
-         defaultBindingMode: BindingMode.OneWay
+         defaultBindingMode: BindingMode.TwoWay
     );
 
     public InvoiceItemModel InvoiceItem
@@ -20,7 +19,7 @@ public partial class InvoiceItemListComponent : ContentView
 
     public static readonly BindableProperty DeleteCommandProperty = BindableProperty.Create(
          propertyName: nameof(DeleteCommand),
-         returnType: typeof(IAsyncRelayCommand),
+         returnType: typeof(IRelayCommand),
          declaringType: typeof(InvoiceItemListComponent),
          defaultValue: null,
          defaultBindingMode: BindingMode.OneWay
@@ -34,15 +33,15 @@ public partial class InvoiceItemListComponent : ContentView
          defaultBindingMode: BindingMode.OneWay
     );
 
-    public IAsyncRelayCommand DeleteCommand
+    public IRelayCommand DeleteCommand
     {
-        get => (IAsyncRelayCommand)GetValue(DeleteCommandProperty);
+        get => (IRelayCommand)GetValue(DeleteCommandProperty);
         set => SetValue(DeleteCommandProperty, value);
     }
 
     public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(
          propertyName: nameof(CommandParameter),
-         returnType: typeof(string),
+         returnType: typeof(InvoiceItemModel),
          declaringType: typeof(InvoiceItemListComponent),
          defaultValue: null,
          defaultBindingMode: BindingMode.TwoWay
@@ -54,9 +53,9 @@ public partial class InvoiceItemListComponent : ContentView
         set => SetValue(EditCommandProperty, value);
     }
 
-    public string CommandParameter
+    public InvoiceItemModel CommandParameter
     {
-        get => (string)GetValue(CommandParameterProperty);
+        get => (InvoiceItemModel)GetValue(CommandParameterProperty);
         set => SetValue(CommandParameterProperty, value);
     }
 

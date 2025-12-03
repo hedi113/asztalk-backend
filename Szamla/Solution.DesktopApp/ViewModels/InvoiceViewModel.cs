@@ -2,7 +2,7 @@
 
 namespace Solution.DesktopApp.ViewModels;
 
-public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceItemService invoiceItemService, AppDbContext dbContext) : InvoiceModel, IQueryAttributable
+public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceItemService invoiceItemService, AppDbContext dbContext) : InvoiceModel
 {
     #region life cycle commands
     public IAsyncRelayCommand AppearingCommand => new AsyncRelayCommand(OnAppearingkAsync);
@@ -15,10 +15,10 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     #endregion
 
     #region event commands
-    public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnAddInvoiceItemAsync);
-    public IAsyncRelayCommand OnAddInvoiceCommand => new AsyncRelayCommand(OnAddInvoiceAsync);
-    public IAsyncRelayCommand UpdateCommand => new AsyncRelayCommand(OnUpdateInvoiceItemAsync);
-    public IAsyncRelayCommand DeleteCommand => new AsyncRelayCommand(OnDeleteInvoiceItemAsync);
+    public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnSaveInvoiceItemAsync);
+    public IAsyncRelayCommand OnAddInvoiceCommand => new AsyncRelayCommand(OnSaveInvoiceAsync);
+    public IAsyncRelayCommand EditCommand => new AsyncRelayCommand<InvoiceItemModel>(OnUpdInvoiceItemAsync);
+    public IRelayCommand DeleteCommand => new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
     #endregion
 
     private InvoiceModelValidator invoiceValidator => new InvoiceModelValidator(null);
@@ -28,26 +28,11 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     [ObservableProperty]
     private ValidationResult validationResult = new ValidationResult();
 
-    private delegate Task ButtonActionDelagate();
-    private ButtonActionDelagate asyncButtonActionAddInvoiceItem;
-    private ButtonActionDelagate asyncButtonActionAddInvoice;
-    private ButtonActionDelagate asyncButtonActionUpdateInvoiceItem;
-    private ButtonActionDelagate asyncButtonActionDeleteInvoiceItem;
-
 
     [ObservableProperty]
     private InvoiceItemModel invoiceItem = new InvoiceItemModel();
 
 
-    public async void ApplyQueryAttributes(IDictionary<string, object> query)
-    {
-        bool invoiceHasValue = query.TryGetValue("InvoiceItem", out object result);
-
-        asyncButtonActionAddInvoiceItem = OnSaveInvoiceItemAsync;
-        asyncButtonActionAddInvoice = OnSaveInvoiceAsync;
-        asyncButtonActionUpdateInvoiceItem = OnUpdateInvoiceItemAsync;
-        asyncButtonActionDeleteInvoiceItem = OnDeleteInvoiceItemAsync;
-    }
 
     private async Task OnAppearingkAsync()
     {
@@ -55,9 +40,6 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
     private async Task OnDisappearingAsync()
     { }
-
-    private async Task OnAddInvoiceItemAsync() => await asyncButtonActionAddInvoiceItem();
-    private async Task OnAddInvoiceAsync() => await asyncButtonActionAddInvoice();
 
     private async Task OnSaveInvoiceItemAsync()
     {
@@ -114,30 +96,15 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
         ClearInvoiceForm();
     }
 
-    private async Task OnDeleteInvoiceItemAsync()
+    private void OnRemoveInvoiceItem(InvoiceItemModel model)
     {
-        this.InvoiceItems.Remove(InvoiceItem);
+        this.InvoiceItems.Remove(model);
     }
 
-    private async Task OnUpdateInvoiceItemAsync()
+    private async Task OnUpdInvoiceItemAsync(InvoiceItemModel model)
     {
-        InvoiceItemModel model = new()
-        {
-            Id = InvoiceItem.Id,
-            Name = InvoiceItem.Name,
-            UnitPrice = InvoiceItem.UnitPrice,
-            Quantity = InvoiceItem.Quantity
-        };
-
-        this.ValidationResult = await invoiceItemValidator.ValidateAsync(InvoiceItem);
-
-        if (!ValidationResult.IsValid)
-        {
-            return;
-        }
-
         InvoiceItem = model;
-        
+        InvoiceItems.Remove(model);
     }
 
     private void ClearInvoiceItemForm()

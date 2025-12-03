@@ -62,13 +62,6 @@
                                                          CommandParameter="{Binding Id}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.Footer>
-                    <FlexLayout JustifyContent="SpaceBetween" Direction="Row"
-                             Margin="0,20">
-                        <Button Text="Previous page" Command="{Binding PreviousPageCommand}" />
-                        <Button Text="Next page" Command="{Binding NextPageCommand}" />
-                    </FlexLayout>
-                </CollectionView.Footer>
             </CollectionView>
         </ScrollView>
 

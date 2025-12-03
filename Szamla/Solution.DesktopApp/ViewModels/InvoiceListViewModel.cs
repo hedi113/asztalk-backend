@@ -8,10 +8,7 @@ public partial class InvoiceListViewModel(AppDbContext dbContext, IInvoiceServic
     public IAsyncRelayCommand DisappearingCommand => new AsyncRelayCommand(OnDisappearingAsync);
     #endregion
 
-    #region paging commands
-    public ICommand PreviousPageCommand { get; private set; }
-    public ICommand NextPageCommand { get; private set; }
-    #endregion
+
 
     #region component commands
     public IAsyncRelayCommand DeleteCommand => new AsyncRelayCommand<int>((id) => OnDeleteAsync(id));
@@ -31,30 +28,13 @@ public partial class InvoiceListViewModel(AppDbContext dbContext, IInvoiceServic
 
     private async Task OnAppearingAsync()
     {
-        PreviousPageCommand = new Command(async () => await OnPreviousPageAsync(), () => page > 1 && !isLoading);
-        NextPageCommand = new Command(async () => await OnNextPageAsync(), () => !isLoading && hasNextPage);
-
         await LoadInvoicesAsync();
     }
 
     private async Task OnDisappearingAsync()
     { }
 
-    private async Task OnPreviousPageAsync()
-    {
-        if (isLoading) return;
 
-        page = page <= 1 ? 1 : --page;
-        await LoadInvoicesAsync();
-    }
-
-    private async Task OnNextPageAsync()
-    {
-        if (isLoading) return;
-
-        page++;
-        await LoadInvoicesAsync();
-    }
 
     private async Task LoadInvoicesAsync()
     {
@@ -62,7 +42,7 @@ public partial class InvoiceListViewModel(AppDbContext dbContext, IInvoiceServic
 
         var result = await invoiceService.GetPagedAsync(page);
 
-        if(result.IsError)
+        if (result.IsError)
         {
             await Application.Current.MainPage.DisplayAlert("Error", "Invoices not loaded!", "OK");
             return;
@@ -73,10 +53,8 @@ public partial class InvoiceListViewModel(AppDbContext dbContext, IInvoiceServic
 
         hasNextPage = numberOfInvoicesInDB - (page * 20) > 0;
         isLoading = false;
-
-        ((Command)PreviousPageCommand).ChangeCanExecute();
-        ((Command)NextPageCommand).ChangeCanExecute();
     }
+
 
     private async Task OnDeleteAsync(int id)
     {

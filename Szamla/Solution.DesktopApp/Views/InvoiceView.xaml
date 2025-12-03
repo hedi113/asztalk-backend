@@ -204,7 +204,8 @@
                                 <components:InvoiceItemListComponent InvoiceItem="{Binding .}"
                                                      DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InvoiceViewModel}}, Path=DeleteCommand}"
                                                      EditCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InvoiceViewModel}}, Path=EditCommand}"
-                                                     CommandParameter="{Binding Id}"/>
+                                                     CommandParameter="{Binding .}"
+                                                     />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
