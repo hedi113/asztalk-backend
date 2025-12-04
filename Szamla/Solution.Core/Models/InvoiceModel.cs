@@ -14,15 +14,15 @@ public partial class InvoiceModel : ObservableObject
 
     [ObservableProperty]
     [JsonPropertyName("creationDate")]
-    private DateTime creationDate;
+    private DateTime creationDate = DateTime.Now;
 
     [ObservableProperty]
     [JsonPropertyName("sumOfInvoiceItemValues")]
     private int sumOfInvoiceItemValues;
 
+    [JsonPropertyName("invoiceItems")]
     [ObservableProperty]
-    [JsonPropertyName("")]
-    private ObservableCollection<InvoiceItemModel> invoiceItems;
+    public ObservableCollection<InvoiceItemModel> invoiceItems = new ObservableCollection<InvoiceItemModel>();
 
     public InvoiceModel() { }
 
@@ -35,11 +35,11 @@ public partial class InvoiceModel : ObservableObject
 
         var invoiceItems = entity.InvoiceItems.Select(x => new InvoiceItemModel(x)).ToList();
 
-        this.id = entity.Id;
-        this.invoiceNumber = entity.InvoiceNumber;
-        this.creationDate = entity.CreationDate;
-        this.sumOfInvoiceItemValues = entity.SumOfInvoiceItemValues;
-        this.invoiceItems = new ObservableCollection<InvoiceItemModel>(invoiceItems);
+        Id = entity.Id;
+        InvoiceNumber = entity.InvoiceNumber;
+        CreationDate = entity.CreationDate;
+        SumOfInvoiceItemValues = entity.SumOfInvoiceItemValues;
+        InvoiceItems = new ObservableCollection<InvoiceItemModel>(invoiceItems);
     }
 
     public InvoiceEntity ToEntity()

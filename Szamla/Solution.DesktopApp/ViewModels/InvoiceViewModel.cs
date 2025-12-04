@@ -16,7 +16,7 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
     #region event commands
     public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnSaveInvoiceItemAsync);
-    public IAsyncRelayCommand OnAddInvoiceCommand => new AsyncRelayCommand(OnSaveInvoiceAsync);
+    public ICommand OnAddInvoiceCommand {  get; private set; }
     public IAsyncRelayCommand EditCommand => new AsyncRelayCommand<InvoiceItemModel>(OnUpdInvoiceItemAsync);
     public IRelayCommand DeleteCommand => new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
     #endregion
@@ -33,9 +33,9 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     private InvoiceItemModel invoiceItem = new InvoiceItemModel();
 
 
-
     private async Task OnAppearingkAsync()
     {
+        OnAddInvoiceCommand = new Command(async () => await OnSaveInvoiceAsync(), () => InvoiceItems != null);
     }
 
     private async Task OnDisappearingAsync()
@@ -49,19 +49,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
         {
             return;
         }
-
-        //var result = await invoiceItemService.CreateAsync(InvoiceItem);
-        //var message = result.IsError ? result.FirstError.Description : "Invoice item saved";
-        //var title = result.IsError ? "Error" : "Information";
-
-        //if(!result.IsError)
-        //{
-        //    ClearInvoiceItemForm();
-        //} 
-
-        //await Application.Current.MainPage.DisplayAlert(title, message, "OK");
-        InvoiceItems ??= new ObservableCollection<InvoiceItemModel>();
-        InvoiceItems.Add(new InvoiceItemModel
+        var a = InvoiceItems.ToList();
+        a.Add(new InvoiceItemModel
         { 
             Name = InvoiceItem.Name,
             Quantity = InvoiceItem.Quantity,
@@ -69,12 +58,16 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
             Id = InvoiceItem.Id,
             InvoiceId = this.Id
         });
+        InvoiceItems = new ObservableCollection<InvoiceItemModel>(a);
 
         ClearInvoiceItemForm();
     }
 
     private async Task OnSaveInvoiceAsync()
     {
+        ((Command)OnAddInvoiceCommand).ChangeCanExecute();
+
+
         this.ValidationResult = await invoiceValidator.ValidateAsync(this);
 
         if (!ValidationResult.IsValid)

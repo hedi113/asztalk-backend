@@ -28,7 +28,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="0" Margin="10,0,0,0">
 
@@ -72,7 +73,8 @@
         
         
         
-        <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="3"  Margin="10,0,0,0">
+        <StackLayout Orientation="Vertical" Grid.Column="0" Grid.Row="4"  Margin="10,0,0,0">
+            <Label Text="Tétel hozzáadása" HorizontalTextAlignment="Center"/>
             <sf:SfTextInputLayout Hint="Megnevezés"
             ContainerType="Outlined"
                 ErrorText="{
@@ -212,7 +214,7 @@
                 </Border>
             </ScrollView>
         </StackLayout>
-        <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="3" HorizontalOptions="End" VerticalOptions="End" Margin="30,10,30,0">
+        <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="4" HorizontalOptions="End" VerticalOptions="End" Margin="30,10,30,0">
             <VerticalStackLayout Style="{StaticResource FormLineContainer}">
                 <Button Text="Számla mentése" Command="{Binding OnAddInvoiceCommand}" WidthRequest="250"/>
             </VerticalStackLayout>
