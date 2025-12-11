@@ -57,7 +57,6 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:InvoiceModel">
                         <components:InvoiceListComponent Invoice="{Binding .}"
-                                                         EditCommand ="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InvoiceListViewModel}}, Path=EditCommand}"
                                                          DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewModels:InvoiceListViewModel}}, Path=DeleteCommand}"
                                                          CommandParameter="{Binding Id}"/>
                     </DataTemplate>

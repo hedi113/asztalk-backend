@@ -36,12 +36,12 @@
             <sf:SfTextInputLayout Hint="Számlaszám"
                 ContainerType="Outlined"
                 ErrorText="{
-                         Binding ValidationResult,
+                         Binding InvoiceValidationResult,
                          Converter={StaticResource ValidationResultToErrorMessageConverter},
                          ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceNumberProperty}
                          }"
                 HasError="{
-                         Binding ValidationResult,
+                         Binding InvoiceValidationResult,
                          Converter={StaticResource ValidationResultToHasErrorConverter},
                          ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceNumberProperty} 
                          }">
@@ -58,12 +58,12 @@
             <sf:SfTextInputLayout Hint="Számla kelte"
                 ContainerType="Outlined"
                 ErrorText="{
-                        Binding ValidationResult,
+                        Binding InvoiceValidationResult,
                         Converter={StaticResource ValidationResultToErrorMessageConverter},
                         ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceCreationDateProperty}
                         }"
                 HasError="{
-                        Binding ValidationResult,
+                        Binding InvoiceValidationResult,
                         Converter={StaticResource ValidationResultToHasErrorConverter},
                         ConverterParameter={x:Static validator:InvoiceModelValidator.InvoiceCreationDateProperty} 
                         }">
@@ -78,12 +78,12 @@
             <sf:SfTextInputLayout Hint="Megnevezés"
             ContainerType="Outlined"
                 ErrorText="{
-              Binding ValidationResult,
+              Binding InvoiceItemValidationResult,
               Converter={StaticResource ValidationResultToErrorMessageConverter},
               ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemNameProperty}
               }"
                 HasError="{
-              Binding ValidationResult,
+              Binding InvoiceItemValidationResult,
               Converter={StaticResource ValidationResultToHasErrorConverter},
               ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemNameProperty} 
               }">
@@ -99,12 +99,12 @@
             <sf:SfTextInputLayout Hint="Egységár"
             ContainerType="Outlined"
                 ErrorText="{
-            Binding ValidationResult,
+            Binding InvoiceItemValidationResult,
             Converter={StaticResource ValidationResultToErrorMessageConverter},
             ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemUnitPriceProperty}
             }"
              HasError="{
-            Binding ValidationResult,
+            Binding InvoiceItemValidationResult,
             Converter={StaticResource ValidationResultToHasErrorConverter},
             ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemUnitPriceProperty} 
             }">
@@ -124,12 +124,12 @@
             <sf:SfTextInputLayout Hint="Mennyiség"
             ContainerType="Outlined"
                 ErrorText="{
-            Binding ValidationResult,
+            Binding InvoiceItemValidationResult,
             Converter={StaticResource ValidationResultToErrorMessageConverter},
             ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemQuantityProperty}
             }"
             HasError="{
-            Binding ValidationResult,
+            Binding InvoiceItemValidationResult,
             Converter={StaticResource ValidationResultToHasErrorConverter},
             ConverterParameter={x:Static validator:InvoiceItemModelValidator.InvoiceItemQuantityProperty} 
             }">
@@ -216,7 +216,7 @@
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="4" HorizontalOptions="End" VerticalOptions="End" Margin="30,10,30,0">
             <VerticalStackLayout Style="{StaticResource FormLineContainer}">
-                <Button Text="Számla mentése" Command="{Binding OnAddInvoiceCommand}" WidthRequest="250"/>
+                <Button Text="Számla mentése" Command="{Binding OnSaveInvoiceCommand}" WidthRequest="250"/>
             </VerticalStackLayout>
         </StackLayout>
     </Grid>
