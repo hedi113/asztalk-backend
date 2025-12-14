@@ -4,8 +4,12 @@
 namespace Solution.DesktopApp.ViewModels;
 
 
-public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceItemService invoiceItemService, AppDbContext dbContext) : InvoiceModel, IQueryAttributable
+public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
 {
+    private readonly IInvoiceService invoiceService;
+    private readonly IInvoiceItemService invoiceItemService;
+    private readonly AppDbContext dbContext;
+
     #region life cycle commands
     public IAsyncRelayCommand AppearingCommand => new AsyncRelayCommand(OnAppearingkAsync);
     public IAsyncRelayCommand DisappearingCommand => new AsyncRelayCommand(OnDisappearingAsync);
@@ -18,7 +22,11 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
     #region event commands
     public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnSaveInvoiceItemAsync);
-    public IAsyncRelayCommand OnSaveInvoiceCommand => new AsyncRelayCommand(async () => await OnSaveInvoiceAsync(), () => InvoiceItems?.Count > 0 && InvoiceValidationResult.IsValid);
+    
+    private readonly IAsyncRelayCommand onSaveInvoiceCommand;
+    public IAsyncRelayCommand OnSaveInvoiceCommand => onSaveInvoiceCommand;
+
+    public IAsyncRelayCommand SubmitCommand => new AsyncRelayCommand(OnSubmitAsync);
     public IAsyncRelayCommand EditCommand => new AsyncRelayCommand<InvoiceItemModel>(OnUpdInvoiceItemAsync);
     public IRelayCommand DeleteCommand => new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
     #endregion
@@ -36,10 +44,24 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
     [ObservableProperty]
     private InvoiceItemModel invoiceItem = new InvoiceItemModel();
 
+    private delegate Task ButtonActionDelagate();
+    private ButtonActionDelagate asyncButtonAction;
+
+    [ObservableProperty]
+    private string buttonTitle;
+
+    public InvoiceViewModel(IInvoiceService invoiceService, IInvoiceItemService invoiceItemService, AppDbContext dbContext)
+    {
+        this.invoiceService = invoiceService;
+        this.invoiceItemService = invoiceItemService;
+        this.dbContext = dbContext;
+
+        onSaveInvoiceCommand = new AsyncRelayCommand(OnSaveInvoiceAsync, CanSaveInvoice);
+    }
+
 
     private async Task OnAppearingkAsync()
     {
-        //OnSaveInvoiceCommand.NotifyCanExecuteChanged();
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
 
@@ -52,6 +74,8 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
         if(!hasValue)
         {
+            asyncButtonAction = OnSaveInvoiceAsync;
+            ButtonTitle = "Számla mentése"; 
             return;
         }
 
@@ -63,8 +87,12 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
         this.SumOfInvoiceItemValues = model.SumOfInvoiceItemValues;
         this.InvoiceItems = model.InvoiceItems;
 
+        asyncButtonAction = OnUpdateInvoiceAsync;
+        ButtonTitle = "Változtatások mentése";
+
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
+    private bool CanSaveInvoice() => (InvoiceValidationResult?.IsValid ?? false) && InvoiceItems?.Count > 0;
 
     private async Task OnSaveInvoiceItemAsync()
     {
@@ -136,9 +164,11 @@ public partial class InvoiceViewModel(IInvoiceService invoiceService, IInvoiceIt
 
         await Application.Current.MainPage.DisplayAlert(title, message, "OK");
 
-        ClearInvoiceForm();
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
+
+    private async Task OnSubmitAsync() => await asyncButtonAction();
+
 
     private void OnRemoveInvoiceItem(InvoiceItemModel model)
     {

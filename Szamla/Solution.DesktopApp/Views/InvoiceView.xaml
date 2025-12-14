@@ -216,7 +216,7 @@
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="4" HorizontalOptions="End" VerticalOptions="End" Margin="30,10,30,0">
             <VerticalStackLayout Style="{StaticResource FormLineContainer}">
-                <Button Text="Számla mentése" Command="{Binding OnSaveInvoiceCommand}" WidthRequest="250"/>
+                <Button Text="{Binding ButtonTitle}" Command="{Binding SubmitCommand}" WidthRequest="250"/>
             </VerticalStackLayout>
         </StackLayout>
     </Grid>
