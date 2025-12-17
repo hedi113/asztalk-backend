@@ -1,8 +1,4 @@
-﻿
-
-
-namespace Solution.DesktopApp.ViewModels;
-
+﻿namespace Solution.DesktopApp.ViewModels;
 
 public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
 {
@@ -11,228 +7,258 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
     private readonly AppDbContext dbContext;
 
     #region life cycle commands
-    public IAsyncRelayCommand AppearingCommand => new AsyncRelayCommand(OnAppearingkAsync);
-    public IAsyncRelayCommand DisappearingCommand => new AsyncRelayCommand(OnDisappearingAsync);
+    public IAsyncRelayCommand AppearingCommand { get; }
+    public IAsyncRelayCommand DisappearingCommand { get; }
     #endregion
 
     #region validation
-    public IRelayCommand ValidateInvoiceCommand => new AsyncRelayCommand<string>(OnValidateInvoiceAsync);
-    public IRelayCommand ValidateInvoiceItemCommand => new AsyncRelayCommand<string>(OnValidateInvoiceItemAsync);
+    public IRelayCommand ValidateInvoiceCommand { get; }
+    public IRelayCommand ValidateInvoiceItemCommand { get; }
     #endregion
 
     #region event commands
-    public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnSaveInvoiceItemAsync);
-
-    private IAsyncRelayCommand onSaveInvoiceCommand;
-    public IAsyncRelayCommand OnSaveInvoiceCommand => onSaveInvoiceCommand;
-    public IAsyncRelayCommand SubmitCommand => new AsyncRelayCommand(OnSubmitAsync);
-
-    public IAsyncRelayCommand EditCommand => new AsyncRelayCommand<InvoiceItemModel>(OnUpdInvoiceItemAsync);
-    public IRelayCommand DeleteCommand => new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
+    public IAsyncRelayCommand AddInvoiceItemCommand { get; }
+    public IAsyncRelayCommand SubmitCommand { get; }
+    public IAsyncRelayCommand EditCommand { get; }
+    public IRelayCommand DeleteCommand { get; }
     #endregion
 
-    private InvoiceModelValidator invoiceValidator => new InvoiceModelValidator(null);
-
-    private InvoiceItemModelValidator invoiceItemValidator => new InvoiceItemModelValidator(null);
-
-    [ObservableProperty]
-    private ValidationResult invoiceValidationResult = new ValidationResult();
+    private readonly InvoiceModelValidator invoiceValidator = new(null);
+    private readonly InvoiceItemModelValidator invoiceItemValidator = new(null);
 
     [ObservableProperty]
-    private ValidationResult invoiceItemValidationResult = new ValidationResult();
+    private ValidationResult invoiceValidationResult = new();
 
     [ObservableProperty]
-    private InvoiceItemModel invoiceItem = new InvoiceItemModel();
+    private ValidationResult invoiceItemValidationResult = new();
 
-    private delegate Task ButtonActionDelagate();
-    private ButtonActionDelagate asyncButtonAction;
+    [ObservableProperty]
+    private InvoiceItemModel invoiceItem = new();
 
     [ObservableProperty]
     private string buttonTitle;
 
-    public DateTime maxDateTime => DateTime.Now;
+    private bool isEditMode;
 
-    public InvoiceViewModel(IInvoiceService invoiceService, IInvoiceItemService invoiceItemService, AppDbContext dbContext)
+    public DateTime MaxDateTime => DateTime.Now;
+
+    public InvoiceViewModel(
+        IInvoiceService invoiceService,
+        IInvoiceItemService invoiceItemService,
+        AppDbContext dbContext)
     {
         this.invoiceService = invoiceService;
         this.invoiceItemService = invoiceItemService;
         this.dbContext = dbContext;
-        //delegate ide
-        onSaveInvoiceCommand = new AsyncRelayCommand(OnSaveInvoiceAsync, CanSaveInvoice);
-        asyncButtonAction = OnSaveInvoiceAsync;
 
+        AppearingCommand = new AsyncRelayCommand(OnAppearingAsync);
+        DisappearingCommand = new AsyncRelayCommand(OnDisappearingAsync);
+
+        AddInvoiceItemCommand = new AsyncRelayCommand(OnSaveInvoiceItemAsync);
+        SubmitCommand = new AsyncRelayCommand(OnSubmitAsync, CanSaveInvoice);
+
+        EditCommand = new AsyncRelayCommand<InvoiceItemModel>(OnEditInvoiceItemAsync);
+        DeleteCommand = new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
+
+        ValidateInvoiceCommand =
+            new AsyncRelayCommand<string>(OnValidateInvoiceAsync);
+
+        ValidateInvoiceItemCommand =
+            new AsyncRelayCommand<string>(OnValidateInvoiceItemAsync);
+
+        ButtonTitle = "Számla mentése";
     }
 
-    private async Task OnAppearingkAsync()
+    #region Lifecycle
+
+    private Task OnAppearingAsync()
     {
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
+        SubmitCommand.NotifyCanExecuteChanged();
+        return Task.CompletedTask;
     }
 
-    private async Task OnDisappearingAsync()
-    { }
+    private Task OnDisappearingAsync() => Task.CompletedTask;
 
-    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    #endregion
+
+    #region Navigation
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        bool hasValue = query.TryGetValue("Invoice", out object result);
-
-        if(!hasValue)
-        {   
-            asyncButtonAction = OnSaveInvoiceAsync;
-            ButtonTitle = "Számla mentése"; 
+        if (!query.TryGetValue("Invoice", out var result))
+        {
+            isEditMode = false;
+            ButtonTitle = "Számla mentése";
             return;
         }
 
-        InvoiceModel model = result as InvoiceModel;
+        var model = (InvoiceModel)result;
 
-        this.Id = model.Id;
-        this.InvoiceNumber = model.InvoiceNumber;
-        this.CreationDate = model.CreationDate;
-        this.SumOfInvoiceItemValues = model.SumOfInvoiceItemValues;
-        this.InvoiceItems = model.InvoiceItems;
+        Id = model.Id;
+        InvoiceNumber = model.InvoiceNumber;
+        CreationDate = model.CreationDate;
+        SumOfInvoiceItemValues = model.SumOfInvoiceItemValues;
+        InvoiceItems = model.InvoiceItems;
 
-        
+        isEditMode = true;
         ButtonTitle = "Változtatások mentése";
-        //delegate ide
-        onSaveInvoiceCommand = new AsyncRelayCommand(OnUpdateInvoiceAsync, CanSaveInvoice);
-        asyncButtonAction = OnSaveInvoiceAsync;
 
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
+        SubmitCommand.NotifyCanExecuteChanged();
     }
-    private bool CanSaveInvoice() => (InvoiceValidationResult?.IsValid ?? false) && InvoiceItems?.Count > 0;
+
+    #endregion
+
+    #region Submit
+
+    private bool CanSaveInvoice() =>
+        (InvoiceValidationResult?.IsValid ?? false) &&
+        InvoiceItems?.Count > 0;
+
+    private async Task OnSubmitAsync()
+    {
+        InvoiceValidationResult = await invoiceValidator.ValidateAsync(this);
+        if (!InvoiceValidationResult.IsValid)
+            return;
+
+        if (isEditMode)
+        {
+            var result = await invoiceService.UpdateAsync(this);
+            await HandleResultAsync(result);
+        }
+        else
+        {
+            var result = await invoiceService.CreateAsync(this);
+            await HandleResultAsync(result);
+        }
+
+        SubmitCommand.NotifyCanExecuteChanged();
+    }
+
+    private async Task HandleResultAsync(ErrorOr<Success> result)
+    {
+        var title = result.IsError ? "Hiba" : "Infó";
+        var message = result.IsError
+            ? result.FirstError.Description
+            : "Számla elmentve.";
+
+        if (!result.IsError)
+            ClearInvoiceForm();
+
+        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+    }
+
+    private async Task HandleResultAsync(ErrorOr<InvoiceModel> result)
+    {
+        var title = result.IsError ? "Hiba" : "Infó";
+        var message = result.IsError
+            ? result.FirstError.Description
+            : "Számla elmentve.";
+
+        if (!result.IsError)
+            ClearInvoiceForm();
+
+        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
+    }
+
+
+
+    #endregion
+
+    #region Invoice Items
 
     private async Task OnSaveInvoiceItemAsync()
     {
-        this.InvoiceItemValidationResult = await invoiceItemValidator.ValidateAsync(InvoiceItem);
+        InvoiceItemValidationResult =
+            await invoiceItemValidator.ValidateAsync(InvoiceItem);
 
         if (!InvoiceItemValidationResult.IsValid)
-        {
             return;
-        }
-        var a = InvoiceItems.ToList();
-        a.Add(new InvoiceItemModel
-        { 
+
+        var items = InvoiceItems.ToList();
+
+        items.Add(new InvoiceItemModel
+        {
             Name = InvoiceItem.Name,
             Quantity = InvoiceItem.Quantity,
             UnitPrice = InvoiceItem.UnitPrice,
             Id = InvoiceItem.Id,
-            InvoiceId = this.Id
+            InvoiceId = Id
         });
-        InvoiceItems = new ObservableCollection<InvoiceItemModel>(a);
+
+        InvoiceItems = new ObservableCollection<InvoiceItemModel>(items);
 
         ClearInvoiceItemForm();
-
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
+        SubmitCommand.NotifyCanExecuteChanged();
     }
-    //onsubmit ide
-    private async Task OnSubmitAsync() => await asyncButtonAction();
-
-    private async Task OnSaveInvoiceAsync()
-    {
-        this.InvoiceValidationResult = await invoiceValidator.ValidateAsync(this);
-
-        if (!InvoiceValidationResult.IsValid)
-        {
-            return;
-        }
-
-        var result = await invoiceService.CreateAsync(this);
-        var message = result.IsError ? result.FirstError.Description : "Számla elmentve.";
-        var title = result.IsError ? "Hiba" : "Infó";
-
-        if (!result.IsError)
-        {
-            ClearInvoiceForm();
-        }
-
-        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
-
-        ClearInvoiceForm();
-
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
-
-    }
-
-    private async Task OnUpdateInvoiceAsync()
-    {
-        this.InvoiceValidationResult = await invoiceValidator.ValidateAsync(this);
-
-        if (!InvoiceValidationResult.IsValid)
-        {
-            return;
-        }
-
-        var result = await invoiceService.UpdateAsync(this);
-        var message = result.IsError ? result.FirstError.Description : "Számla elmentve.";
-        var title = result.IsError ? "Hiba" : "Infó";
-
-        if (!result.IsError)
-        {
-            ClearInvoiceForm();
-        }
-
-        await Application.Current.MainPage.DisplayAlert(title, message, "OK");
-
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
-    }
-
-
 
     private void OnRemoveInvoiceItem(InvoiceItemModel model)
     {
-        this.InvoiceItems.Remove(model);
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
-
+        InvoiceItems.Remove(model);
+        SubmitCommand.NotifyCanExecuteChanged();
     }
 
-    private async Task OnUpdInvoiceItemAsync(InvoiceItemModel model)
+    private Task OnEditInvoiceItemAsync(InvoiceItemModel model)
     {
         InvoiceItem = model;
         InvoiceItems.Remove(model);
-
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
+        SubmitCommand.NotifyCanExecuteChanged();
+        return Task.CompletedTask;
     }
 
+    #endregion
 
-    private void ClearInvoiceItemForm()
-    {
-        InvoiceItem.UnitPrice = null;
-        InvoiceItem.Quantity = null;
-        InvoiceItem.Name = null;
-    }
-
-    private void ClearInvoiceForm()
-    {
-        this.InvoiceItems.Clear();
-        this.InvoiceNumber = null;
-        this.CreationDate = DateTime.Now;
-        this.SumOfInvoiceItemValues = 0;
-    }
+    #region Validation
 
     private async Task OnValidateInvoiceAsync(string propertyName)
     {
-        var result = await invoiceValidator.ValidateAsync(this, options => options.IncludeProperties(propertyName));
+        var result = await invoiceValidator.ValidateAsync(
+            this,
+            o => o.IncludeProperties(propertyName));
 
-        InvoiceValidationResult.Errors.Remove(InvoiceValidationResult.Errors.FirstOrDefault(x => x.PropertyName == propertyName));
+        InvoiceValidationResult.Errors.RemoveAll(
+            x => x.PropertyName == propertyName ||
+                 x.PropertyName == InvoiceModelValidator.GlobalProperty);
 
-        InvoiceValidationResult.Errors.Remove(InvoiceValidationResult.Errors.FirstOrDefault(x => x.PropertyName == InvoiceModelValidator.GlobalProperty));
         InvoiceValidationResult.Errors.AddRange(result.Errors);
 
         OnPropertyChanged(nameof(InvoiceValidationResult));
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
+        SubmitCommand.NotifyCanExecuteChanged();
     }
 
     private async Task OnValidateInvoiceItemAsync(string propertyName)
     {
-        var result = await invoiceItemValidator.ValidateAsync(InvoiceItem, options => options.IncludeProperties(propertyName));
+        var result = await invoiceItemValidator.ValidateAsync(
+            InvoiceItem,
+            o => o.IncludeProperties(propertyName));
 
-        InvoiceItemValidationResult.Errors.Remove(InvoiceItemValidationResult.Errors.FirstOrDefault(x => x.PropertyName == propertyName));
+        InvoiceItemValidationResult.Errors.RemoveAll(
+            x => x.PropertyName == propertyName ||
+                 x.PropertyName == InvoiceItemModelValidator.GlobalProperty);
 
-        InvoiceItemValidationResult.Errors.Remove(InvoiceItemValidationResult.Errors.FirstOrDefault(x => x.PropertyName == InvoiceItemModelValidator.GlobalProperty));
         InvoiceItemValidationResult.Errors.AddRange(result.Errors);
 
         OnPropertyChanged(nameof(InvoiceItemValidationResult));
-        OnSaveInvoiceCommand.NotifyCanExecuteChanged();
+        SubmitCommand.NotifyCanExecuteChanged();
     }
 
-    
+    #endregion
+
+    #region Clear helpers
+
+    private void ClearInvoiceItemForm()
+    {
+        InvoiceItem = new InvoiceItemModel();
+    }
+
+    private void ClearInvoiceForm()
+    {
+        InvoiceItems.Clear();
+        InvoiceNumber = null;
+        CreationDate = DateTime.Now;
+        SumOfInvoiceItemValues = 0;
+        isEditMode = false;
+        ButtonTitle = "Számla mentése";
+    }
+
+    #endregion
 }

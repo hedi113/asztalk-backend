@@ -147,7 +147,7 @@
                 </editors:SfNumericEntry>
             </sf:SfTextInputLayout>
             <VerticalStackLayout Style="{StaticResource FormLineContainer}">
-                <Button Text="Tétel hozzáadása" Command="{Binding OnAddInvoiceItemCommand}" WidthRequest="250"/>
+                <Button Text="Tétel hozzáadása" Command="{Binding AddInvoiceItemCommand}" WidthRequest="250"/>
             </VerticalStackLayout>
         </StackLayout>
         <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="0" Margin="30,10,30,0">
