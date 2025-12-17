@@ -22,9 +22,10 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
 
     #region event commands
     public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnSaveInvoiceItemAsync);
-    
+
     private IAsyncRelayCommand onSaveInvoiceCommand;
     public IAsyncRelayCommand OnSaveInvoiceCommand => onSaveInvoiceCommand;
+    public IAsyncRelayCommand SubmitCommand => new AsyncRelayCommand(OnSubmitAsync);
 
     public IAsyncRelayCommand EditCommand => new AsyncRelayCommand<InvoiceItemModel>(OnUpdInvoiceItemAsync);
     public IRelayCommand DeleteCommand => new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
@@ -43,6 +44,8 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
     [ObservableProperty]
     private InvoiceItemModel invoiceItem = new InvoiceItemModel();
 
+    private delegate Task ButtonActionDelagate();
+    private ButtonActionDelagate asyncButtonAction;
 
     [ObservableProperty]
     private string buttonTitle;
@@ -56,6 +59,8 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         this.dbContext = dbContext;
         //delegate ide
         onSaveInvoiceCommand = new AsyncRelayCommand(OnSaveInvoiceAsync, CanSaveInvoice);
+        asyncButtonAction = OnSaveInvoiceAsync;
+
     }
 
     private async Task OnAppearingkAsync()
@@ -72,6 +77,7 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
 
         if(!hasValue)
         {   
+            asyncButtonAction = OnSaveInvoiceAsync;
             ButtonTitle = "Számla mentése"; 
             return;
         }
@@ -88,6 +94,7 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         ButtonTitle = "Változtatások mentése";
         //delegate ide
         onSaveInvoiceCommand = new AsyncRelayCommand(OnUpdateInvoiceAsync, CanSaveInvoice);
+        asyncButtonAction = OnSaveInvoiceAsync;
 
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
@@ -117,6 +124,8 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
     //onsubmit ide
+    private async Task OnSubmitAsync() => await asyncButtonAction();
+
     private async Task OnSaveInvoiceAsync()
     {
         this.InvoiceValidationResult = await invoiceValidator.ValidateAsync(this);
