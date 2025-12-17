@@ -23,10 +23,9 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
     #region event commands
     public IAsyncRelayCommand OnAddInvoiceItemCommand => new AsyncRelayCommand(OnSaveInvoiceItemAsync);
     
-    private readonly IAsyncRelayCommand onSaveInvoiceCommand;
+    private IAsyncRelayCommand onSaveInvoiceCommand;
     public IAsyncRelayCommand OnSaveInvoiceCommand => onSaveInvoiceCommand;
 
-    public IAsyncRelayCommand SubmitCommand => new AsyncRelayCommand(OnSubmitAsync);
     public IAsyncRelayCommand EditCommand => new AsyncRelayCommand<InvoiceItemModel>(OnUpdInvoiceItemAsync);
     public IRelayCommand DeleteCommand => new RelayCommand<InvoiceItemModel>(OnRemoveInvoiceItem);
     #endregion
@@ -44,21 +43,20 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
     [ObservableProperty]
     private InvoiceItemModel invoiceItem = new InvoiceItemModel();
 
-    private delegate Task ButtonActionDelagate();
-    private ButtonActionDelagate asyncButtonAction;
 
     [ObservableProperty]
     private string buttonTitle;
+
+    public DateTime maxDateTime => DateTime.Now;
 
     public InvoiceViewModel(IInvoiceService invoiceService, IInvoiceItemService invoiceItemService, AppDbContext dbContext)
     {
         this.invoiceService = invoiceService;
         this.invoiceItemService = invoiceItemService;
         this.dbContext = dbContext;
-
+        //delegate ide
         onSaveInvoiceCommand = new AsyncRelayCommand(OnSaveInvoiceAsync, CanSaveInvoice);
     }
-
 
     private async Task OnAppearingkAsync()
     {
@@ -73,8 +71,7 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         bool hasValue = query.TryGetValue("Invoice", out object result);
 
         if(!hasValue)
-        {
-            asyncButtonAction = OnSaveInvoiceAsync;
+        {   
             ButtonTitle = "Számla mentése"; 
             return;
         }
@@ -87,8 +84,10 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         this.SumOfInvoiceItemValues = model.SumOfInvoiceItemValues;
         this.InvoiceItems = model.InvoiceItems;
 
-        asyncButtonAction = OnUpdateInvoiceAsync;
+        
         ButtonTitle = "Változtatások mentése";
+        //delegate ide
+        onSaveInvoiceCommand = new AsyncRelayCommand(OnUpdateInvoiceAsync, CanSaveInvoice);
 
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
@@ -117,7 +116,7 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
 
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
-
+    //onsubmit ide
     private async Task OnSaveInvoiceAsync()
     {
         this.InvoiceValidationResult = await invoiceValidator.ValidateAsync(this);
@@ -128,8 +127,8 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         }
 
         var result = await invoiceService.CreateAsync(this);
-        var message = result.IsError ? result.FirstError.Description : "Invoice saved";
-        var title = result.IsError ? "Error" : "Information";
+        var message = result.IsError ? result.FirstError.Description : "Számla elmentve.";
+        var title = result.IsError ? "Hiba" : "Infó";
 
         if (!result.IsError)
         {
@@ -154,8 +153,8 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         }
 
         var result = await invoiceService.UpdateAsync(this);
-        var message = result.IsError ? result.FirstError.Description : "Invoice saved";
-        var title = result.IsError ? "Error" : "Information";
+        var message = result.IsError ? result.FirstError.Description : "Számla elmentve.";
+        var title = result.IsError ? "Hiba" : "Infó";
 
         if (!result.IsError)
         {
@@ -167,7 +166,6 @@ public partial class InvoiceViewModel : InvoiceModel, IQueryAttributable
         OnSaveInvoiceCommand.NotifyCanExecuteChanged();
     }
 
-    private async Task OnSubmitAsync() => await asyncButtonAction();
 
 
     private void OnRemoveInvoiceItem(InvoiceItemModel model)

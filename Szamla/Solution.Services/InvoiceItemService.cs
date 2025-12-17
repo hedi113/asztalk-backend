@@ -12,7 +12,7 @@ public class InvoiceItemService(AppDbContext dbContext) : IInvoiceItemService
 
         if (exists)
         {
-            return Error.Conflict(description: "Invoice item already exists!");
+            return Error.Conflict(description: "A számlatétel már létezik!");
         }
 
         var invoiceItem = model.ToEntity();
@@ -47,7 +47,7 @@ public class InvoiceItemService(AppDbContext dbContext) : IInvoiceItemService
 
         if (invoiceItem is null)
         {
-            return Error.NotFound(description: "Invoice item not found.");
+            return Error.NotFound(description: "Nincs ilyen számlatétel.");
         }
         return new InvoiceItemModel(invoiceItem);
     }

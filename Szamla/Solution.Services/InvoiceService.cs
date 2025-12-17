@@ -9,20 +9,18 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
 
     public async Task<ErrorOr<InvoiceModel>> CreateAsync(InvoiceModel model)
     {
-        int sumOfInvoiceItemValues = model.InvoiceItems.Where(x => x.UnitPrice.HasValue).Sum(x => x.UnitPrice!.Value);
-
         bool exists = await dbContext.Invoices.AnyAsync(x => x.InvoiceNumber == model.InvoiceNumber);
 
         if (exists)
         {
-            return Error.Conflict(description: "Invoice already exists!");
+            return Error.Conflict(description: "A számla már létezik!");
         }
 
         var invoice = new InvoiceEntity()
         {
             InvoiceNumber = model.InvoiceNumber,
             CreationDate = model.CreationDate,
-            SumOfInvoiceItemValues = sumOfInvoiceItemValues,
+            SumOfInvoiceItemValues = model.InvoiceItems.Sum(x => x.Sum!.Value),
             InvoiceItems = [.. model.InvoiceItems.Select(x => x.ToEntity())]
         };
 
@@ -33,24 +31,36 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
         {
             InvoiceNumber = model.InvoiceNumber,
             CreationDate = model.CreationDate,
-            SumOfInvoiceItemValues = sumOfInvoiceItemValues
+            SumOfInvoiceItemValues = model.InvoiceItems.Sum(x => x.Sum!.Value)
         };    
     }
 
     public async Task<ErrorOr<Success>> UpdateAsync(InvoiceModel model)
     {
-        ErrorOr<List<InvoiceItemModel>> invoiceItems = await invoiceItemService.GetAllAsync();
-        int sumOfInvoiceItemValues = (int)invoiceItems.Value.Where(x => x.InvoiceId == model.Id).Sum(x => x.UnitPrice);
+        //find invoice wiht the ide form the model
+        //update the invocie with the properties from the model
+        //save changes
 
-        var result = new InvoiceEntity()
+        var invoice = await dbContext.Invoices
+        .Include(i => i.InvoiceItems)
+        .FirstOrDefaultAsync(i => i.Id == model.Id);
+
+        if (invoice == null)
+            return Error.NotFound();
+
+        int sumOfInvoiceItemValues = model.InvoiceItems.Sum(x => x.Sum ?? 0);
+
+        invoice.InvoiceNumber = model.InvoiceNumber;
+        invoice.CreationDate = model.CreationDate;
+        invoice.SumOfInvoiceItemValues = sumOfInvoiceItemValues;
+
+        invoice.InvoiceItems.Clear();
+
+        foreach (var item in model.InvoiceItems)
         {
-            InvoiceNumber = model.InvoiceNumber,
-            CreationDate = model.CreationDate,
-            SumOfInvoiceItemValues = sumOfInvoiceItemValues,
-            InvoiceItems = [.. model.InvoiceItems.Select(x => x.ToEntity())]
-        };
+            invoice.InvoiceItems.Add(item.ToEntity());
+        }
 
-        dbContext.Attach(result);
         await dbContext.SaveChangesAsync();
         return new ErrorOr<Success>() { };
     }
@@ -69,7 +79,7 @@ public class InvoiceService(AppDbContext dbContext, IInvoiceItemService invoiceI
 
         if (invoice == null)
         {
-            return Error.NotFound(description: "Invoice not found.");
+            return Error.NotFound(description: "Nincs ilyen számla.");
         }
 
         return new InvoiceModel(invoice);

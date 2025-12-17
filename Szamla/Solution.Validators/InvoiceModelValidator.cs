@@ -12,19 +12,14 @@ public class InvoiceModelValidator : BaseValidators<InvoiceModel>
     {
         RuleFor(x => x.InvoiceNumber)
             .NotEmpty()
-                .WithMessage("Invoice number is required!")
+                .WithMessage("A számlaszám megadása kötelező!")
             .MaximumLength(24)
-                .WithMessage("Invoice number can't be longer than 24 characters!")
+                .WithMessage("A számlaszám nem állhat több mint 24 karakterből!")
             .MinimumLength(24)
-                .WithMessage("At least 24 characters is required for the invoice number!");
+                .WithMessage("A számlaszámnak minimum 24 karakterből kell állnia!");
         RuleFor(x => x.CreationDate)
             .NotEmpty()
-                .WithMessage("A date must be given!")
-            .LessThanOrEqualTo(DateTime.Now)
-                .WithMessage("The creation date can't be in the future!");
-        RuleFor(x => x.InvoiceItems)
-            .NotEmpty()
-                .WithMessage("Add at least 1 invoice item to the invoice!");
+                .WithMessage("A dátum megadása kötelező!");
     }
 
 }
