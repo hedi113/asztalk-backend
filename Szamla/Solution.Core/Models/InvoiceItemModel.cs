@@ -29,7 +29,7 @@ public partial class InvoiceItemModel : ObservableObject
 
     [ObservableProperty]
     [JsonPropertyName("invoiceId")]
-    private int invoiceId = 1;
+    private int invoiceId;
 
     public InvoiceItemModel() { }
 
