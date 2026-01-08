@@ -4,18 +4,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.LoadEnviromentVariables()
-       .ConfigureDatabase();
+       .ConfigureDatabase()
+       .LoadSettings()
+       .UseSecurity()
+       .UseIdentity()
+       .ConfigureDI();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseRouting();
+
+app.UseSecurity();
 
 app.MapControllers();
 
