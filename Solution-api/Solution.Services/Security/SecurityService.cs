@@ -22,7 +22,7 @@ public class SecurityService(UserManager<UserEntity> userManager, IOptions<JWTSe
             FullName = $"{model.FirstName} {model.LastName}",
             PhoneNumber = model.PhoneNumber,
             PhoneNumberConfirmed = true,
-            UserName = $"{model.FirstName} {model.LastName}"
+            UserName = $"{model.FirstName}.{model.LastName}"
         }, model.Password);
 
         var errors = result.Errors.Select(x => x.Description);

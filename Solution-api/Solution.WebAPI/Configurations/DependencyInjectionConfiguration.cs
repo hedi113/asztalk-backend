@@ -1,4 +1,7 @@
-﻿namespace Solution.WebAPI.Configurations;
+﻿using Solution.Services.Security;
+using Solution.Services.User;
+
+namespace Solution.WebAPI.Configurations;
 
 public static class DependencyInjectionConfiguration
 {
