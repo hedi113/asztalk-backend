@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.LoadEnviromentVariables()
+       .UseScalarOpenApi()
        .ConfigureDatabase()
        .LoadSettings()
        .UseSecurity()
@@ -20,5 +21,7 @@ app.UseRouting();
 app.UseSecurity();
 
 app.MapControllers();
+
+app.UseScalarOpenApi();
 
 app.Run();
