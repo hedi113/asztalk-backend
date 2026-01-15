@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.OpenApi;
+using Solution.WebAPI.Transformers;
 using System.Reflection;
 
 namespace Solution.WebAPI.Configurations;
 
-public static class ConfigureSwaggerOpenApi
+public static class ConfigureReDocOpenApi
 {
     extension(IHostApplicationBuilder builder)
     {
-        public IHostApplicationBuilder UseSwaggerOpenApi()
+        public IHostApplicationBuilder UseReDocOpenAPI()
         {
+            builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddOpenApi(options =>
             {
                 options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
+                options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
             });
-
-            builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwaggerGen(options =>
             {
@@ -37,8 +39,6 @@ public static class ConfigureSwaggerOpenApi
                     }
                 });
 
-                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -59,7 +59,7 @@ public static class ConfigureSwaggerOpenApi
 
     extension(WebApplication app)
     {
-        public IApplicationBuilder UseSwaggerOpenAPI()
+        public IApplicationBuilder UseReDocOpenAPI()
         {
             app.MapOpenApi();
 
@@ -68,11 +68,12 @@ public static class ConfigureSwaggerOpenApi
                 options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
             });
 
-            app.UseSwaggerUI(options =>
+            app.UseReDoc(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                options.RoutePrefix = string.Empty;
-            });
+                options.RoutePrefix = "redoc";
+                options.SpecUrl = "/openapi/v1.json";
+                options.DocumentTitle = "MyApp API Documentation";
+            }); ;
 
             return app;
         }
