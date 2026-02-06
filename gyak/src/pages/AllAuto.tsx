@@ -7,7 +7,7 @@ import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
 
 const AllAuto = () => {
   const navigate = useNavigate();
-  const [, setAutok] = useState<Auto[]>([]);
+  const [autok, setAutok] = useState<Auto[]>([]);
 
   useEffect(() => {
     apiClient
