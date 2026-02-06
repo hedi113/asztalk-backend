@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { Auto } from "../types/Auto";
 import apiClient, { BASE_URL } from "../api/apiClient";
-import { toast } from "react-toastify";
 import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const AllAuto = () => {
   const navigate = useNavigate();
