@@ -1,5 +1,6 @@
 ﻿using Hivasok;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 var file = await File.ReadAllLinesAsync("hivasok.txt");
 
@@ -60,12 +61,12 @@ if(vege > kezdet)
 else { kul = kezdet - vege; }
 
 if(kul.Seconds  > 0)
-{
-    Console.WriteLine($"A hívás hossza: {kul.TotalMinutes + 1}");
+{ 
+    Console.WriteLine($"A hívás hossza: {Math.Ceiling( kul.TotalMinutes + 1)}");
 }
 else
 {
-    Console.WriteLine($"A hívás hossza: {kul.TotalMinutes}");
+    Console.WriteLine($"A hívás hossza: {Math.Ceiling(kul.TotalMinutes)}");
 }
 
 
@@ -81,9 +82,9 @@ foreach(var felhasznalo in telefonszamok)
     double totalCallMinutes = 0;
     foreach(var hivas in felhasznalo.Value)
     {
-        totalCallMinutes = hivas.HivasVege.TotalMinutes - hivas.HivasKezdete.TotalMinutes;
+        totalCallMinutes = (hivas.HivasVege.TotalMinutes - hivas.HivasKezdete.TotalMinutes) % 60;
     }
-    stringBuilder.AppendLine($"{felhasznalo.Key} {totalCallMinutes}");
+    stringBuilder.AppendLine($"{felhasznalo.Key} {Math.Ceiling(totalCallMinutes)}");
 }
 
 await File.WriteAllTextAsync(contents: stringBuilder.ToString(), path: "percek.txt", encoding: Encoding.UTF8);
@@ -92,7 +93,7 @@ await File.WriteAllTextAsync(contents: stringBuilder.ToString(), path: "percek.t
 //csúcsidőn kívül! Az eredményt jelenítse meg a képernyőn!
 
 var hivasokCsucsidoben = hivasok.Where(x => x.HivasKezdete.Hours > 7 && x.HivasKezdete.Hours < 18).Count();
-var hivasokCsucsidonKivul = hivasok.Where(x => x.HivasKezdete.Hours < 7 && x.HivasKezdete.Hours > 18).Count();
+var hivasokCsucsidonKivul = hivasok.Where(x => x.HivasKezdete.Hours < 7 || x.HivasKezdete.Hours > 18).Count();
 
 Console.WriteLine($"Hívások csúcsidőben: {hivasokCsucsidoben}\nHívások csúcsidőn kívül: {hivasokCsucsidonKivul}");
 
@@ -100,3 +101,49 @@ Console.WriteLine($"Hívások csúcsidőben: {hivasokCsucsidoben}\nHívások cs�
 //beszélt a felhasználó mobil számmal és hány percet vezetékessel! Az eredményt jelenítse
 //meg a képernyőn!
 
+double allMinutesMobile = 0;
+double allMinutesCable = 0;
+
+foreach (var felhasznalo in telefonszamok)
+{
+    double totalCallMinutesForMobile = 0;
+    double totalCallMinutesForCable = 0;
+    foreach (var hivas in felhasznalo.Value)
+    {
+        if($"{hivas.Telefonszam[0]}{hivas.Telefonszam[1]}" == "39" || $"{hivas.Telefonszam[0]}{hivas.Telefonszam[1]}" == "41" || $"{hivas.Telefonszam[0]}{hivas.Telefonszam[1]}" == "71")
+        {
+            totalCallMinutesForMobile = hivas.HivasVege.TotalMinutes - hivas.HivasKezdete.TotalMinutes;
+            allMinutesMobile += totalCallMinutesForMobile;
+        }
+        else
+        {
+            totalCallMinutesForCable = hivas.HivasVege.TotalMinutes - hivas.HivasKezdete.TotalMinutes;
+            allMinutesCable += totalCallMinutesForCable;   
+        }
+    }
+}
+
+Console.WriteLine($"Összes perc vezetékesen: {Math.Ceiling(allMinutesCable)}");
+Console.WriteLine($"Összes perc mobilon: {Math.Ceiling(allMinutesMobile % 60)}");
+
+//6.Összesítse a hivasok.txt fájl adatai alapján, mennyit kell fizetnie a felhasználónak a
+//csúcsdíjas hívásokért! Az eredményt a képernyőn jelenítse meg! 
+
+double final = 0;
+
+foreach(var hivas in hivasok)
+{
+    if(hivas.HivasKezdete.Hours > 7 && hivas.HivasVege.Hours < 18)
+    {
+        if(hivas.HivasVege.Seconds > 0 && hivas.HivasKezdete.Seconds > 0)
+        {
+            final += hivas.HivasVege.TotalMinutes - hivas.HivasKezdete.TotalMinutes + 2;
+        }
+        else
+        {
+            final += hivas.HivasVege.TotalMinutes - hivas.HivasKezdete.TotalMinutes;
+        }
+    }
+}
+
+Console.WriteLine($"A csúcsidős hívások ára: {Math.Ceiling(final) * 30} Ft");
