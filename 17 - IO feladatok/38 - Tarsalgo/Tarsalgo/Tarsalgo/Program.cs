@@ -143,12 +143,17 @@ for (int i = 0; i < idopontok.Count; i += 2)
 //hogy a beolvasott azonosítójú személy mennyi időt volt a társalgóban, és a megfigyelési
 //időszak végén bent volt-e még! 
 
-double osszesPerc = 0;
+int ConvertToExactMinutes(TimeSpan time)
+{
+   return time.Hours * 60 + time.Minutes;
+}
+
+int osszesPerc = 0;
 bool bentVoltE = true;
 for (int i = 0; i < idopontok.Count; i += 2)
 {
-    double first = idopontok[i].TotalMinutes;
-    double second = (i + 1 < idopontok.Count) ? idopontok[i + 1].TotalMinutes : first;
+    int first = ConvertToExactMinutes(idopontok[i]);
+    int second = (i + 1 < idopontok.Count) ? ConvertToExactMinutes(idopontok[i + 1]) : first;
     if (i + 1 > idopontok.Count)
     {
         bentVoltE = false;
