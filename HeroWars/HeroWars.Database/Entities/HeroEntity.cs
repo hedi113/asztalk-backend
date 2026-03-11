@@ -18,6 +18,8 @@ public class HeroEntity
     [Required]
     public HeroRoleEnum Role { get ; set ; }
     [Required]
+    public int Intelligence { get; set; }
+    [Required]
     public int Agility { get; set; }
     [Required]
     public int Strength { get; set; }

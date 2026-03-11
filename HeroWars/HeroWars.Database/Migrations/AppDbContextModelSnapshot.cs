@@ -41,6 +41,9 @@ namespace HeroWars.Database.Migrations
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
+                    b.Property<int>("Intelligence")
+                        .HasColumnType("int");
+
                     b.Property<int>("MagicAttack")
                         .HasColumnType("int");
 

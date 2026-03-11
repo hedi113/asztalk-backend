@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HeroWars.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260311080216_init")]
+    [Migration("20260311081531_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -42,6 +42,9 @@ namespace HeroWars.Database.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Health")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Intelligence")
                         .HasColumnType("int");
 
                     b.Property<int>("MagicAttack")
