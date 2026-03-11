@@ -1,7 +1,7 @@
 using HeroWars.Database;
 using Microsoft.EntityFrameworkCore;
 
-var connectionString = @"Data Source=.\\SQLEXPRESS;Database=HeroWarsDB;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;";
+var connectionString = "Data Source=.\\SQLEXPRESS;Database=HeroWarsDB;Trusted_Connection=True;MultipleActiveResultSets=True;TrustServerCertificate=True;";
 
 var builder = WebApplication.CreateBuilder(args);
 

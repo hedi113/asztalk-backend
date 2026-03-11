@@ -115,3 +115,6 @@ HeroWars/.vs
 HeroWars/HeroWars.Database/obj
 HeroWars/HeroWars.Services/obj
 HeroWars/HeroWarsApi/obj
+HeroWars/HeroWars.Database/bin
+HeroWars/HeroWars.Services/bin
+HeroWars/HeroWarsApi/bin
