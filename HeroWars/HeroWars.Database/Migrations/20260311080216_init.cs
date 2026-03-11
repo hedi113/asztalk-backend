@@ -17,6 +17,7 @@ namespace HeroWars.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Role = table.Column<byte>(type: "tinyint", nullable: false),
                     Agility = table.Column<int>(type: "int", nullable: false),
                     Strength = table.Column<int>(type: "int", nullable: false),
                     Health = table.Column<int>(type: "int", nullable: false),

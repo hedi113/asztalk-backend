@@ -58,6 +58,9 @@ namespace HeroWars.Database.Migrations
                     b.Property<int>("PhysicalAttack")
                         .HasColumnType("int");
 
+                    b.Property<byte>("Role")
+                        .HasColumnType("tinyint");
+
                     b.Property<int>("Strength")
                         .HasColumnType("int");
 

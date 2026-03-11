@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeroWars.Database.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,7 @@ public class HeroEntity
     [StringLength(50)]
     public string Name { get; set; }
     [Required]
-    public int Role { get; set; }
+    public HeroRoleEnum Role { get ; set ; }
     [Required]
     public int Agility { get; set; }
     [Required]
