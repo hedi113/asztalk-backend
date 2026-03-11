@@ -1,0 +1,56 @@
+Hero Wars
+
+Olvasd be a herowars.txt fájlt, amelyben minden sor egy hőst ír le.
+A hősről tárolt adatok, vesszővel elválasztva, a következőek:
+Name
+	A hős neve.
+Role
+	A hős szerepköre / osztálya (pl. Tank, Warrior, Mage, Support, Marksman, Healer, Control).
+Intelligence
+	A hős intelligencia statisztikája.
+Agility
+	A hős ügyesség statisztikája.
+Strength
+	A hős erő statisztikája.
+Health
+	A hős teljes életereje.
+Physical Attack
+	A hős fizikai támadás értéke.
+Magic Attack
+	A hős mágikus támadás értéke.
+Armor
+	A hős fizikai páncél értéke.
+Magic Defense
+	A hős mágikus védelem értéke.
+Magic Penetration
+	A hős mágikus ellenállás áttörési értéke (azaz mennyit „tör át” az ellenfél mágikus védekezéséből).
+Armor Penetration
+	A hős fizikai páncél áttörési értéke (azaz mennyit „tör át” az ellenfél Armor-jából).
+	
+Feladatok:
+0 - Olvassa be az adatok a szöveges állományból. (4 pont)
+1 - Írd ki, hány hős található az adatokban. (1 pont)
+
+2 - Keresd meg azt a hőst, akinek a legnagyobb Physical Attack értéke van. Kiírandó: Név, Szerepkör, Physical Attack érték. (2 pont)
+
+3 - Melyik hős rendelkezik a legmagasabb összesített MainStat értékkel? (MainStat = Intelligence + Agility + Strength) (2 pont + 1 pont, ha az OOP elveit használod)
+
+4 - A "hero_role_count.txt" állományba mentse el szerepkörönként a hősök számát. (5 pont)
+	pl.
+	Tank  - 10
+	Healer - 8
+	
+5 - A "heros_by_role.txt" állományba mentse el a hősöket szerepkörönként. (6 pont)
+	pl.
+	Tank
+		- Warrior
+		- Lyria
+	Marksman
+		- Dante
+		- Lara Croft
+		
+5: 20 - 18 pont
+4: 17 - 15 pont
+3: 14 - 11 pont
+2: 10 -  8 pont
+1:  7 -  0 pont
