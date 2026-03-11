@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="HeroWars.Database/HeroWars.Database.csproj" Id="d4478f49-3570-41ea-a6a2-4750bd0952d2" />
+  <Project Path="HeroWars.Services/HeroWars.Services.csproj" />
+  <Project Path="HeroWarsApi/HeroWarsApi.csproj" />
+</Solution>
