@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\HeroWars.Database\HeroWars.Database.csproj" />
     <ProjectReference Include="..\HeroWars.Services\HeroWars.Services.csproj" />
   </ItemGroup>
