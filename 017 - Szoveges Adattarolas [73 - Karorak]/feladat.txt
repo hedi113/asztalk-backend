@@ -1,0 +1,60 @@
+Egy karórákat gyűjtő adatbázissal fogsz dolgozni, amely különböző gyártók modelljeit tartalmazza.
+Az adatok egy CSV fájlban vannak tárolva, amelyet a programodnak kell feldolgoznia.
+
+| Mező                 | Jelentés                                     |
+| -------------------- | -------------------------------------------- |
+| `manufacturer`       | Az óra gyártója (pl. Rolex)                  |
+| `model`              | A modell neve                                |
+| `release_year`       | Megjelenési év                               |
+| `type`               | Típus (analog, digital, smartwatch, stb.)    |
+| `movement`           | Szerkezet (automatic, quartz, manual, smart) |
+| `water_resistance_m` | Vízállóság méterben                          |
+| `case_material`      | Tok anyaga                                   |
+| `functions`          | Funkciók (pl. dátum, kronográf, GPS)         |
+| `category`           | Kategória (luxury, midrange, budget, stb.)   |
+
+FELADATOK:
+
+1 - Olvasd be a CSV fájlt, és tárold az adatokat egy megfelelő adatszerkezetben
+
+2 - Hány karóra található az adatbázisban
+
+3 - Határozd meg melyik a legrégebbi modell és írd ki a teljes adatait
+
+4- Listázd ki azokat az órákat amelyek vízállósága legalább 200 méter
+
+5 - Kérj be a felhasználótól egy kulcsszót (pl. "GPS" vagy "kronográf"), majd:
+    listázd ki azokat az órákat, amelyek functions mezője tartalmazza ezt
+
+6 - Számold ki az órák átlagos vízállóságát
+
+7 - Csoportosítsd az órákat category szerint, majd írd ki:
+	luxury (15 db):
+	 - Rolex Submariner
+	 - Omega Speedmaster
+	midrange (20 db):
+
+8 - Gyártónként írd ki:
+	- hány modelljük van
+	- átlagos vízállóság
+	
+	Példa:
+
+	Rolex:
+	  Modellek száma: 3
+	  Átlag vízállóság: 166.6 m
+	  
+9 - Határozd meg melyik movement típus fordul elő a legtöbbször
+10 - Listázd ki azokat az órákat:
+	 - amelyek luxury kategóriába tartozna és vízállóságuk ≥ 100 m
+	Majd:
+	- csoportosítsd őket gyártó szerint
+	- rendezd gyártón belül év szerint növekvően
+	- formázottan írd ki:	
+		Omega:
+		  - 1957 Speedmaster Professional
+		  - 1993 Seamaster Diver 300M
+
+		Rolex:
+		  - 1953 Submariner
+		  - 1963 Daytona

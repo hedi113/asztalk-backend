@@ -1,0 +1,256 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Solution.Api | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:5000"
+    },
+    {
+      "url": "http://localhost:5001"
+    }
+  ],
+  "paths": {
+    "/api/spaceship": {
+      "post": {
+        "tags": [
+          "Spaceship"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpaceshipModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpaceshipModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpaceshipModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/spaceship/update/{id}": {
+      "put": {
+        "tags": [
+          "Spaceship"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpaceshipModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpaceshipModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSpaceshipModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/spaceship/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Spaceship"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/spaceships": {
+      "get": {
+        "tags": [
+          "Spaceship"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/spaceship/{id}": {
+      "get": {
+        "tags": [
+          "Spaceship"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ShipRoleEnum": {
+        "type": "integer"
+      },
+      "UpdateSpaceshipModel": {
+        "required": [
+          "name",
+          "class",
+          "raceFaction",
+          "length",
+          "crew",
+          "maxWarp",
+          "armament",
+          "shieldType",
+          "hullMaterial",
+          "role"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "class": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "raceFaction": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "length": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "crew": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "maxWarp": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "armament": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "shieldType": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "hullMaterial": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/ShipRoleEnum"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Spaceship"
+    }
+  ]
+}

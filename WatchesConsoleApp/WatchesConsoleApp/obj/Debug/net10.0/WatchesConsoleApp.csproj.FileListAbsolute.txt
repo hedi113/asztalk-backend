@@ -1,0 +1,15 @@
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.AssemblyInfoInputs.cache
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.AssemblyInfo.cs
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\bin\Debug\net10.0\WatchesConsoleApp.exe
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\bin\Debug\net10.0\WatchesConsoleApp.deps.json
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\bin\Debug\net10.0\WatchesConsoleApp.runtimeconfig.json
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\bin\Debug\net10.0\WatchesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\bin\Debug\net10.0\WatchesConsoleApp.pdb
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\refint\WatchesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.pdb
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\WatchesConsoleApp.genruntimeconfig.cache
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\obj\Debug\net10.0\ref\WatchesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\WatchesConsoleApp\WatchesConsoleApp\bin\Debug\net10.0\adatok.csv

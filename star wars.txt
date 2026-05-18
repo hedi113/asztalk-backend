@@ -1,0 +1,65 @@
+| Tulajdonság     | Típus  | Magyarázat               |
+| --------------- | ------ | ------------------------ |
+| Id              | int    | Egyedi azonosító         |
+| Name            | string | Karakter neve            |
+| OrderType       | enum   | Jedi vagy Sith           |
+| Species         | string | Faj (Human, Zabrak stb.) |
+| Homeworld       | string | Származási bolygó        |
+| Era             | enum   | Korszak                  |
+| Rank            | enum   | Rang                     |
+| LightsaberColor | string | Fénykard színe           |
+| Master          | string | Mestere                  |
+| Apprentice      | string | Tanítványa               |
+| ForceSpecialty  | string | Speciális erőhasználat   |
+| IsAlive         | bool   | Él-e                     |
+
+Enum javaslatok (C#)
+
+OrderType
+- Jedi
+- Sith
+
+Era
+- OldRepublic
+- CloneWars
+- Empire
+- Rebellion
+- FirstOrder
+
+Rang
+- Youngling
+- Padawan
+- Knight
+- Master
+- Lord
+- Apprentice
+- DarkLord
+
+1. feladat – CSV beolvasás (4 pont)
+2. feladat – Összes karakter száma (2 pont)
+3. feladat – Jedi és Sith száma (3 pont)
+4. feladat – Piros fénykardosok listája (3 pont) 
+   Várható eredmény: Karakterek nevei, pl. Darth Vader, Darth Maul, Count Dooku….
+5. feladat – Tatooine származású karakterek (3 pont)
+   Várható eredmény: Karakterek nevei, pl. Anakin Skywalker, Luke Skywalker
+6. feladat – Jedi mesterek (3 pont)
+   Várható eredmény: Karakterek nevei, pl. Yoda, Obi-Wan Kenobi, Mace Windu….
+7. feladat – Különböző bolygók száma (2 pont)
+   Várható eredmény: Egész szám, pl. 18.
+8. feladat – Era szerinti csoportosítás (4 pont)
+   Várható eredmény:
+   - CloneWars: 15
+   - Rebellion: 1
+   - Empire: 2
+   - FirstOrder: 2
+   - OldRepublic: 5
+9. feladat – Leggyakoribb fénykard szín (3 pont)
+   Várható eredmény: Pl. Blue.   
+10. feladat – Tanítvánnyal rendelkező karakterek (5 pont)
+    Várható eredmény:
+    - Yoda → Luke Skywalker
+    - Obi-Wan Kenobi → Anakin Skywalker
+    - Anakin Skywalker → Ahsoka Tano
+    - Darth Sidious → Darth Vader
+    - Count Dooku → Asajj Ventress
+    - Kit Fisto → Aayla Secura

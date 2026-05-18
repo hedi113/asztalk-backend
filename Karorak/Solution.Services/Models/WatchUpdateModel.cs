@@ -1,0 +1,27 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Solution.Services.Models;
+
+public class WatchUpdateModel
+{
+    public int Id { get; set; }
+
+    public string Manufacturer { get; set; }
+
+    public string Model { get; set; }
+
+    public int ReleaseYear { get; set; }
+
+    public string Type { get; set; }
+
+    public string Movement { get; set; }
+
+    public int WaterResistanceM { get; set; }
+
+    public string CaseMaterial { get; set; }
+
+    public string Functions { get; set; }
+
+    public string Category { get; set; }
+}

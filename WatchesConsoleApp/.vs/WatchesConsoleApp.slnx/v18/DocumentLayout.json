@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0BECC72F-DFB2-421C-AD4D-D88F46BC9054}|WatchesConsoleApp\\WatchesConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\watchesconsoleapp\\watchesconsoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BECC72F-DFB2-421C-AD4D-D88F46BC9054}|WatchesConsoleApp\\WatchesConsoleApp.csproj|solutionrelative:watchesconsoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BECC72F-DFB2-421C-AD4D-D88F46BC9054}|WatchesConsoleApp\\WatchesConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\watchesconsoleapp\\watchesconsoleapp\\watch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BECC72F-DFB2-421C-AD4D-D88F46BC9054}|WatchesConsoleApp\\WatchesConsoleApp.csproj|solutionrelative:watchesconsoleapp\\watch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0BECC72F-DFB2-421C-AD4D-D88F46BC9054}|WatchesConsoleApp\\WatchesConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\watchesconsoleapp\\watchesconsoleapp\\adatok.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0BECC72F-DFB2-421C-AD4D-D88F46BC9054}|WatchesConsoleApp\\WatchesConsoleApp.csproj|solutionrelative:watchesconsoleapp\\adatok.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "adatok.csv",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\WatchesConsoleApp\\adatok.csv",
+              "RelativeDocumentMoniker": "WatchesConsoleApp\\adatok.csv",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\WatchesConsoleApp\\adatok.csv",
+              "RelativeToolTip": "WatchesConsoleApp\\adatok.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2026-04-15T06:01:22.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Watch.cs",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\WatchesConsoleApp\\Watch.cs",
+              "RelativeDocumentMoniker": "WatchesConsoleApp\\Watch.cs",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\WatchesConsoleApp\\Watch.cs",
+              "RelativeToolTip": "WatchesConsoleApp\\Watch.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:58:36.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\WatchesConsoleApp\\Program.cs",
+              "RelativeDocumentMoniker": "WatchesConsoleApp\\Program.cs",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\WatchesConsoleApp\\WatchesConsoleApp\\Program.cs",
+              "RelativeToolTip": "WatchesConsoleApp\\Program.cs",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAA4AAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T05:58:10.886Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

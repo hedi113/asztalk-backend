@@ -1,0 +1,15 @@
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\bin\Debug\net10.0\TurkeyRoutesConsoleApp.exe
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\bin\Debug\net10.0\adatok.csv
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\bin\Debug\net10.0\TurkeyRoutesConsoleApp.deps.json
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\bin\Debug\net10.0\TurkeyRoutesConsoleApp.runtimeconfig.json
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\bin\Debug\net10.0\TurkeyRoutesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\bin\Debug\net10.0\TurkeyRoutesConsoleApp.pdb
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.AssemblyInfoInputs.cache
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.AssemblyInfo.cs
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\refint\TurkeyRoutesConsoleApp.dll
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.pdb
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\TurkeyRoutesConsoleApp.genruntimeconfig.cache
+C:\Users\b1hodhed\Desktop\TurkeyRoutesConsoleApp\TurkeyRoutesConsoleApp\obj\Debug\net10.0\ref\TurkeyRoutesConsoleApp.dll

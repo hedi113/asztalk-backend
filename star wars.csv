@@ -1,0 +1,26 @@
+Id,Name,OrderType,Species,Homeworld,Era,Rank,LightsaberColor,Master,Apprentice,ForceSpecialty,IsAlive
+1,Yoda,Jedi,Unknown,Unknown,CloneWars,Master,Green,None,Luke Skywalker,Force Wisdom,false
+2,Luke Skywalker,Jedi,Human,Tatooine,Rebellion,Master,Green,Yoda,Ben Solo,Force Projection,true
+3,Obi-Wan Kenobi,Jedi,Human,Stewjon,CloneWars,Master,Blue,Qui-Gon Jinn,Anakin Skywalker,Mind Trick,false
+4,Anakin Skywalker,Jedi,Human,Tatooine,CloneWars,Knight,Blue,Obi-Wan Kenobi,Ahsoka Tano,Force Power,false
+5,Mace Windu,Jedi,Human,Haruun Kal,CloneWars,Master,Purple,None,Depa Billaba,Vaapad,false
+6,Ahsoka Tano,Jedi,Human,Shili,CloneWars,Padawan,Green,Anakin Skywalker,None,Force Stealth,true
+7,Kit Fisto,Jedi,Nautolan,Glee Anselm,CloneWars,Master,Green,None,None,Underwater Combat,true
+8,Plo Koon,Jedi,Kel Dor,Dorin,CloneWars,Master,Blue,None,Aayla Secura,Force Lightning Resistance,false
+9,Saesee Tiin,Jedi,Iktotchi,Iktotch,CloneWars,Master,Blue,None,None,Starfighter Combat,false
+10,Ki-Adi-Mundi,Jedi,Cerean,Cerea,CloneWars,Master,Blue,None,Stass Allie,Force Strategy,false
+11,Darth Sidious,Sith,Human,Naboo,Empire,DarkLord,Red,Darth Plagueis,Darth Vader,Force Lightning,false
+12,Darth Vader,Sith,Human,Tatooine,Empire,Lord,Red,Darth Sidious,None,Force Choke,false
+13,Darth Maul,Sith,Zabrak,Dathomir,CloneWars,Apprentice,Red,Darth Sidious,None,Double Saber,false
+14,Count Dooku,Sith,Human,Serenno,CloneWars,Lord,Red,Darth Sidious,Asajj Ventress,Force Lightning,false
+15,Kylo Ren,Sith,Human,Chandrila,FirstOrder,Lord,Red,Luke Skywalker,None,Force Freeze,false
+16,Asajj Ventress,Sith,Human,Dathomir,CloneWars,Apprentice,Red,Count Dooku,None,Stealth,false
+17,Revan,Jedi,Human,Korriban,OldRepublic,Master,Purple,None,Meetra Surik,Force Tactics,false
+18,Bastila Shan,Jedi,Human,Coruscant,OldRepublic,Master,Yellow,Stark Hyperspace,None,Force Battle Meditation,false
+19,Exar Kun,Sith,Human,Dantooine,OldRepublic,DarkLord,Red,None,None,Force Magic,false
+20,Malak,Sith,Human,Mandalore,OldRepublic,Lord,Red,Exar Kun,None,Force Combat,false
+21,Depa Billaba,Jedi,Human,Korriban,CloneWars,Master,Blue,Mace Windu,None,Force Stealth,false
+22,Ben Solo,Jedi,Human,Chandrila,FirstOrder,Padawan,Blue,Luke Skywalker,None,Force Projection,true
+23,Luminara Unduli,Jedi,Mirialan,Mirial,CloneWars,Master,Blue,None,Aayla Secura,Force Healing,false
+24,Aayla Secura,Jedi,Twi'lek,Ryloth,CloneWars,Master,Blue,Kit Fisto,None,Agility,false
+25,Qui-Gon Jinn,Jedi,Human,Coruscant,CloneWars,Master,Green,None,Obi-Wan Kenobi,Force Meditation,false

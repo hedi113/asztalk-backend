@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\startrekconsoleapp\\startrekconsoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|solutionrelative:startrekconsoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\startrekconsoleapp\\startrekconsoleapp\\star_trek_ships.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|solutionrelative:startrekconsoleapp\\star_trek_ships.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\startrekconsoleapp\\startrekconsoleapp\\shiproleenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|solutionrelative:startrekconsoleapp\\shiproleenum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|c:\\users\\b1hodhed\\desktop\\startrekconsoleapp\\startrekconsoleapp\\spaceship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05B1D27A-0BA2-4787-85EA-7469C7B7AEBC}|StarTrekConsoleApp\\StarTrekConsoleApp.csproj|solutionrelative:startrekconsoleapp\\spaceship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "star_trek_ships.csv",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\star_trek_ships.csv",
+              "RelativeDocumentMoniker": "StarTrekConsoleApp\\star_trek_ships.csv",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\star_trek_ships.csv",
+              "RelativeToolTip": "StarTrekConsoleApp\\star_trek_ships.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2026-03-19T07:03:10.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Spaceship.cs",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\Spaceship.cs",
+              "RelativeDocumentMoniker": "StarTrekConsoleApp\\Spaceship.cs",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\Spaceship.cs",
+              "RelativeToolTip": "StarTrekConsoleApp\\Spaceship.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBgAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T06:57:16.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\Program.cs",
+              "RelativeDocumentMoniker": "StarTrekConsoleApp\\Program.cs",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\Program.cs",
+              "RelativeToolTip": "StarTrekConsoleApp\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACoAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T06:56:51.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ShipRoleEnum.cs",
+              "DocumentMoniker": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\ShipRoleEnum.cs",
+              "RelativeDocumentMoniker": "StarTrekConsoleApp\\ShipRoleEnum.cs",
+              "ToolTip": "C:\\Users\\b1hodhed\\Desktop\\StarTrekConsoleApp\\StarTrekConsoleApp\\ShipRoleEnum.cs",
+              "RelativeToolTip": "StarTrekConsoleApp\\ShipRoleEnum.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-19T07:07:51.926Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

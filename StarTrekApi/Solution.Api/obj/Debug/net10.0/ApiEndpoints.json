@@ -1,0 +1,81 @@
+[
+  {
+    "ContainingType": "Solution.Api.Controllers.SpaceshipController",
+    "Method": "CreateAsync",
+    "RelativePath": "api/spaceship",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "spaceshipModel",
+        "Type": "Solution.Services.Models.UpdateSpaceshipModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Solution.Api.Controllers.SpaceshipController",
+    "Method": "GetByIdAsync",
+    "RelativePath": "api/spaceship/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Solution.Api.Controllers.SpaceshipController",
+    "Method": "DeleteAsync",
+    "RelativePath": "api/spaceship/delete/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Solution.Api.Controllers.SpaceshipController",
+    "Method": "UpdateAsync",
+    "RelativePath": "api/spaceship/update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "spaceshipModel",
+        "Type": "Solution.Services.Models.UpdateSpaceshipModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Solution.Api.Controllers.SpaceshipController",
+    "Method": "GetAllAsync",
+    "RelativePath": "api/spaceships",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

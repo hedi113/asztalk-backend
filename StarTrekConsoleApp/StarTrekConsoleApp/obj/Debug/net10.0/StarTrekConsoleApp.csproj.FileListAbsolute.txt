@@ -1,0 +1,15 @@
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\bin\Debug\net10.0\StarTrekConsoleApp.exe
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\bin\Debug\net10.0\star_trek_ships.csv
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\bin\Debug\net10.0\StarTrekConsoleApp.deps.json
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\bin\Debug\net10.0\StarTrekConsoleApp.runtimeconfig.json
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\bin\Debug\net10.0\StarTrekConsoleApp.dll
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\bin\Debug\net10.0\StarTrekConsoleApp.pdb
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.AssemblyInfoInputs.cache
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.AssemblyInfo.cs
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.dll
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\refint\StarTrekConsoleApp.dll
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.pdb
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\StarTrekConsoleApp.genruntimeconfig.cache
+C:\Users\b1hodhed\Desktop\StarTrekConsoleApp\StarTrekConsoleApp\obj\Debug\net10.0\ref\StarTrekConsoleApp.dll
